@@ -1,0 +1,15 @@
+// import { Meteor } from 'meteor/meteor';
+
+import React from 'react';
+
+import HomePublic from './Public';
+
+// toogle this if you want auto switch to logged in home
+// import Dashboard from './Dashboard';
+
+// const Home = () => (Meteor.isClient && Meteor.userId() ? <Dashboard /> : <HomePublic />);
+
+// toogle this if you want auto switch to logged in home
+const Home = () => <HomePublic />;
+
+export default Home;

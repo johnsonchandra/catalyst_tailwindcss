@@ -1,0 +1,62 @@
+fragment OrgAttributes on Org {
+    nr
+    logoUrl
+    phone
+    address
+    zipCode
+    city
+    state
+    country
+
+    latitude
+    longitude
+
+    _id
+    name
+    shortname
+
+    type
+    status
+    description
+    createdBy
+    createdAt
+    updatedBy
+    updatedAt
+
+    Users {
+        _id
+        fullname
+        roles {
+            name
+            value
+            defaultChecked
+        }
+    }
+
+    roles {
+        name
+        value
+        defaultChecked
+    }
+
+    Files {
+        _id
+        name
+        localUrl
+        cloudUrl
+        size
+        mimeType
+        type
+        status
+    }
+
+    histories {
+        party {
+            _id
+            type
+            name
+        }
+        description
+        timestamp
+    }
+}
