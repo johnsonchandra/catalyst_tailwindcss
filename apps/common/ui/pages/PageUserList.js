@@ -66,7 +66,7 @@ class PageUserList extends React.Component {
 
 PageUserList.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
-  roles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  roles: PropTypes.arrayOf(PropTypes.string).isRequired,
   settings: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   currentPageName: PropTypes.string.isRequired,

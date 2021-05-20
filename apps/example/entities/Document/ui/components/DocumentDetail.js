@@ -226,7 +226,8 @@ class DocumentDetail extends React.Component {
                 Set to Draft
               </button>
             )}
-            {data.detailDocument.status === 'Closed' && (
+            {(data.detailDocument.status === 'Draft' ||
+              data.detailDocument.status === 'Closed') && (
               <button
                 type="button"
                 className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

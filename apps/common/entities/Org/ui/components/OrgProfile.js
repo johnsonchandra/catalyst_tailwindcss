@@ -400,7 +400,7 @@ class OrgProfile extends React.Component {
                 Set to Draft
               </button>
             )}
-            {data.detailOrg.status === 'Closed' && (
+            {(data.detailOrg.status === 'Draft' || data.detailOrg.status === 'Closed') && (
               <button
                 type="button"
                 className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -467,7 +467,7 @@ export default compose(
     options: ({ history }) => ({
       onCompleted: () => {
         alert('Organization Deleted!');
-        history.push('/Org/List/Draft/Host');
+        history.push('/Spv/Org/List/Draft/Host');
       },
       onError: (error) => {
         alert(error.message);
@@ -482,7 +482,7 @@ export default compose(
       },
       onCompleted: () => {
         alert('Organization Status set to Draft!');
-        history.push('/Org/List/Draft');
+        history.push('/Spv/Org/List/Draft/Host');
       },
       onError: (error) => {
         alert(error.message);
@@ -497,7 +497,7 @@ export default compose(
       },
       onCompleted: () => {
         alert('Organization Status set to Active!');
-        history.push('/Org/List/Current');
+        history.push('/Spv/Org/List/Current/Host');
       },
       onError: (error) => {
         alert(error.message);

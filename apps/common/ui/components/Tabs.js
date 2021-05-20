@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import classNames from '../../helpers/classNames';
 
-const Tabs = (props) => {
+export default function Tabs(props) {
   const { tabs, current, history } = props;
 
   return (
@@ -66,7 +66,7 @@ const Tabs = (props) => {
       </div>
     </div>
   );
-};
+}
 
 Tabs.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.object).isRequired,

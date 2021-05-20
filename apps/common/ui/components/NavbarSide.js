@@ -151,7 +151,7 @@ export default function NavbarSide(props) {
 
 NavbarSide.propTypes = {
   navigations: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sidebarOpen: PropTypes.func.isRequired,
+  sidebarOpen: PropTypes.bool.isRequired,
   setSidebarOpen: PropTypes.func.isRequired,
   currentPageName: PropTypes.string.isRequired,
 };
