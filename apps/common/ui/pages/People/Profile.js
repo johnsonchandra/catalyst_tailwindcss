@@ -1,10 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 
-import NavbarWithImageBackground from '../../components/NavbarWithImageBackground';
+import PageWrapper from '../PageWrapper';
 import ProfileDetail from '../../components/ProfileDetail';
-
-import navigations from '../Home/navigations';
-import Footer from '../../components/Footer';
 
 const tabs = [
   { name: 'Profile', href: '#', current: true },
@@ -32,19 +31,10 @@ const profile = {
   },
 };
 
-export default function PeopleProfilePage() {
-  window.scrollTo({ top: 0 });
-
+export default function PeopleProfilePage(props) {
   return (
-    <NavbarWithImageBackground
-      logoUrl="/mkcb_logo_with_name.png"
-      logoUrlPopUp="/mkcb_logo_with_name.png"
-      navigations={navigations}
-      caption="People"
-      description="Meet our Team"
-    >
+    <PageWrapper caption="People" description="Meet our Team" {...props}>
       <ProfileDetail tabs={tabs} profile={profile} />
-      <Footer />
-    </NavbarWithImageBackground>
+    </PageWrapper>
   );
 }

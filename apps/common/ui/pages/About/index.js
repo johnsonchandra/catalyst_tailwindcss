@@ -1,10 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 
-import NavbarWithImageBackground from '../../components/NavbarWithImageBackground';
+import PageWrapper from '../PageWrapper';
 import CardListWithVerticalImage from '../../components/CardListWithVerticalImage';
-
-import navigations from '../Home/navigations';
-import Footer from '../../components/Footer';
 
 const docs = [
   {
@@ -69,17 +68,10 @@ const docs = [
   },
 ];
 
-export default function AboutPage() {
-  window.scrollTo({ top: 0 });
-
+export default function AboutPage(props) {
   return (
-    <NavbarWithImageBackground
-      navigations={navigations}
-      caption="About Us"
-      description="lorem ipsum"
-    >
+    <PageWrapper caption="About Us" description="lorem ipsum" {...props}>
       <CardListWithVerticalImage docs={docs} caption="About Us" description="lorem ipsum" />
-      <Footer />
-    </NavbarWithImageBackground>
+    </PageWrapper>
   );
 }

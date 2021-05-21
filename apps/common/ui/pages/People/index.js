@@ -1,10 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 
-import NavbarWithImageBackground from '../../components/NavbarWithImageBackground';
+import PageWrapper from '../PageWrapper';
 import CardListSmallAvatar from '../../components/CardListSmallAvatar';
-import Footer from '../../components/Footer';
-
-import navigations from '../Home/navigations';
 
 const avatars = [
   {
@@ -81,19 +80,10 @@ const avatars = [
   },
 ];
 
-export default function PeoplePage() {
-  window.scrollTo({ top: 0 });
-
+export default function PeoplePage(props) {
   return (
-    <NavbarWithImageBackground
-      logoUrl="/mkcb_logo_with_name.png"
-      logoUrlPopUp="/mkcb_logo_with_name.png"
-      navigations={navigations}
-      caption="People"
-      description="Meet our Team"
-    >
+    <PageWrapper caption="People" description="Meet our Team" {...props}>
       <CardListSmallAvatar docs={avatars} caption="People" description="adfadf lorem ipsum" />
-      <Footer />
-    </NavbarWithImageBackground>
+    </PageWrapper>
   );
 }

@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import navigationsFooter from '../pages/Home/navigationsFooter';
-
 export default function Footer(props) {
-  const { logoUrl, motto, copyright } = props;
+  const { logoUrl, motto, copyright, navigationsFooter } = props;
 
   return (
     <footer className="bg-white" aria-labelledby="footerHeading">
@@ -117,13 +115,14 @@ export default function Footer(props) {
 }
 
 Footer.defaultProps = {
-  logoUrl: '/mkcb_logo_with_name.png',
-  motto: 'Catalyst your Development',
-  copyright: 'PT Maya Katalis Cipta Buana',
+  logoUrl: '',
+  motto: '',
+  copyright: '',
 };
 
 Footer.propTypes = {
   logoUrl: PropTypes.string,
   motto: PropTypes.string,
   copyright: PropTypes.string,
+  navigationsFooter: PropTypes.object.isRequired,
 };

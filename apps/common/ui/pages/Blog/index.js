@@ -1,10 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 
-import NavbarWithImageBackground from '../../components/NavbarWithImageBackground';
+import PageWrapper from '../PageWrapper';
 import Blog3ColumnWithImage from '../../components/BlogList3ColumnWithImage';
-import Footer from '../../components/Footer';
-
-import navigations from '../Home/navigations';
 
 const docs = [
   {
@@ -66,19 +65,10 @@ const docs = [
   },
 ];
 
-export default function BlogPage() {
-  window.scrollTo({ top: 0 });
-
+export default function BlogPage(props) {
   return (
-    <NavbarWithImageBackground
-      logoUrl="/mkcb_logo_with_name.png"
-      logoUrlPopUp="/mkcb_logo_with_name.png"
-      navigations={navigations}
-      caption="Blos"
-      description="Keep coming for newest blog from us"
-    >
+    <PageWrapper caption="Blos" description="Keep coming for newest blog from us" {...props}>
       <Blog3ColumnWithImage docs={docs} caption="Blogs" description="You can read our blogs here" />
-      <Footer />
-    </NavbarWithImageBackground>
+    </PageWrapper>
   );
 }

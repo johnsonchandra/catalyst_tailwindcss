@@ -12,6 +12,7 @@ import initApp from '../helpers/initApp';
 // common components
 import NotAuthorized from './components/NotAuthorized';
 import NotFound from './components/NotFound';
+import Loading from './components/Loading';
 
 import Authenticated from './components/RouteAuthenticated';
 import Authorized from './components/RouteAuthorized';
@@ -93,15 +94,50 @@ class CommonApp extends React.Component {
   render() {
     const { props, state, setAfterLoginPath } = this;
 
+    const { ready } = state;
+    const { loading } = props;
+
+    if (loading || !ready) return <Loading />;
+
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact name="home" path="/" component={Home} />
-          <Route exact name="about" path="/about" component={AboutPage} />
-          <Route exact name="people" path="/people" component={PeoplePage} />
-          <Route exact name="people_profile" path="/people/profile" component={PeopleProfilePage} />
-          <Route exact name="blog" path="/blog" component={BlogPage} />
-          <Route exact name="blog_detail" path="/blog/detail" component={BlogDetailPage} />
+          <Route
+            exact
+            name="home"
+            path="/"
+            render={(routeProps) => <Home {...routeProps} {...props} {...state} />}
+          />
+          <Route
+            exact
+            name="about"
+            path="/about"
+            render={(routeProps) => <AboutPage {...routeProps} {...props} {...state} />}
+          />
+          <Route
+            exact
+            name="people"
+            path="/people"
+            render={(routeProps) => <PeoplePage {...routeProps} {...props} {...state} />}
+          />
+          <Route
+            exact
+            name="people_profile"
+            path="/people/profile"
+            render={(routeProps) => <PeopleProfilePage {...routeProps} {...props} {...state} />}
+          />
+          <Route
+            exact
+            name="blog"
+            path="/blog"
+            render={(routeProps) => <BlogPage {...routeProps} {...props} {...state} />}
+          />
+          <Route
+            exact
+            name="blog_detail"
+            path="/blog/detail"
+            render={(routeProps) => <BlogDetailPage {...routeProps} {...props} {...state} />}
+          />
 
           <Authorized
             exact

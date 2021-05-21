@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 
 import {
@@ -8,19 +10,16 @@ import {
   GlobeIcon,
   SunIcon,
 } from '@heroicons/react/outline';
-import NavbarWithImageBackground from '../../components/NavbarWithImageBackground';
-import Footer from '../../components/Footer';
-import NewsletterForm from '../../components/NewsletterForm';
 
-import navigations from './navigations';
+import PageWrapper from '../PageWrapper';
+
+import NewsletterForm from '../../components/NewsletterForm';
 import FAQListWithOffset from '../../components/FAQListWithOffset';
 import TestimonialWithImage from '../../components/TestimonialWithImage';
 import CardListWithSmallIcon from '../../components/CardListWithSmallIcon';
 import HeroWithQuoteAndStats from '../../components/HeroWithQuoteAndStats';
 
-export default function HomePublic() {
-  window.scrollTo({ top: 0 });
-
+export default function HomePublic(props) {
   const stats = [
     { _id: 1, label: 'Founded', value: '2017' },
     { _id: 2, label: 'Employees', value: '8' },
@@ -89,13 +88,7 @@ export default function HomePublic() {
   ];
 
   return (
-    <NavbarWithImageBackground
-      navigations={navigations}
-      logoUrl="/mkcb_logo_with_name.png"
-      logoUrlPopUp="/mkcb_logo_with_name.png"
-      caption="Catalyst Engine"
-      description="Now with Tailwindcss"
-    >
+    <PageWrapper caption="Catalyst Engine" description="Now with Tailwindcss" {...props}>
       <HeroWithQuoteAndStats
         stats={stats}
         quote="hallo asdfsdff"
@@ -113,7 +106,6 @@ export default function HomePublic() {
       <TestimonialWithImage />
       <FAQListWithOffset docs={faqs} linkUrl="mailto:info@mayacatalyst.com" />
       <NewsletterForm />
-      <Footer />
-    </NavbarWithImageBackground>
+    </PageWrapper>
   );
 }
