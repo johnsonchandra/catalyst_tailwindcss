@@ -32,14 +32,14 @@ onPageLoad(async (sink) => {
   const tenant = Tenant.findOne({ host });
   if (!tenant) throw new Error('Tenant not found in sink');
 
-  sink.appendToHead(`<title>${tenant.settings.fullname}</title>`);
+  sink.appendToHead(`<title>${tenant.settings.name}</title>`);
   sink.appendToHead(`<meta name="description" content="${tenant.settings.description}">`);
 
   // FIXME add here pre-compiled prod css if needed
   // sink.appendToHead(
   //   `<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">`,
   // );
-  sink.appendToHead(`<link rel="shortcut icon" href="${tenant.settings.logo || '/mkcb.ico'}">`);
+  sink.appendToHead(`<link rel="shortcut icon" href="${tenant.settings.iconUrl || '/mkcb.ico'}">`);
   sink.appendToHead(
     `<link rel="apple-touch-icon" sizes="120x120" href="${
       tenant.settings.logo || '/mkcb_logo.png'

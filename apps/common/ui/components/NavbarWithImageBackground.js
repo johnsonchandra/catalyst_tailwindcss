@@ -15,7 +15,7 @@ export default function NavbarWithImageBackground(props) {
     <div className="min-h-screen bg-white">
       <header className="relative pb-24 bg-green-100 sm:pb-32">
         <div className="absolute inset-0">
-          <img className="w-full h-full object-cover" src={imgUrl} alt="background" />
+          <img className="w-full h-full object-cover" src={imgUrl} alt="" />
           <div
             className="absolute inset-0 bg-gradient-to-l from-green-100 to-cyan-700"
             style={{ mixBlendMode: 'multiply' }}

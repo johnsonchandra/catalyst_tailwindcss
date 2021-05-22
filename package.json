@@ -9,7 +9,6 @@
     "free": "meteor deploy catalyst.meteorapp.com --settings settings-free.json --free --mongo"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
     "@babel/runtime": "^7.14.0",
     "@headlessui/react": "^1.2.0",
     "@heroicons/react": "^1.0.1",
@@ -41,6 +40,7 @@
     "moment-timezone": "^0.5.33",
     "postcss": "^8.2.15",
     "postcss-load-config": "^3.0.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-apollo": "^3.1.5",
     "react-autobind": "^1.0.6",
