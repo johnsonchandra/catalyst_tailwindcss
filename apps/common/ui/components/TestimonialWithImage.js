@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function TestimonialWithImage(props) {
-  const { imgUrl, name, role, description } = props;
+  const { imgUrl, name, position, description } = props;
 
   return (
     <div className="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative">
@@ -31,7 +31,7 @@ export default function TestimonialWithImage(props) {
               </div>
               <footer className="mt-6">
                 <p className="text-base font-medium text-white">{name}</p>
-                <p className="text-base font-medium text-cyan-100">{role}</p>
+                <p className="text-base font-medium text-cyan-100">{position}</p>
               </footer>
             </blockquote>
           </div>
@@ -43,7 +43,7 @@ export default function TestimonialWithImage(props) {
 
 TestimonialWithImage.defaultProps = {
   name: 'Johnson Chandra',
-  role: 'Catalyst',
+  position: 'Catalyst',
   description:
     'Lorem Ipsum dolor sit amet, consectetur adpiscing elit. Sed urna nulla vitate laoreet augue.',
   imgUrl:
@@ -53,6 +53,6 @@ TestimonialWithImage.defaultProps = {
 TestimonialWithImage.propTypes = {
   imgUrl: PropTypes.string,
   name: PropTypes.string,
-  role: PropTypes.string,
+  position: PropTypes.string,
   description: PropTypes.string,
 };

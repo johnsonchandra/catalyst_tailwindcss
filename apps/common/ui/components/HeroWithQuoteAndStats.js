@@ -11,7 +11,7 @@ export default function HeroWithQuoteAndStats(props) {
             aria-hidden="true"
             className="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen"
           >
-            <div className="absolute inset-y-0 right-1/2 w-full bg-gray-50 rounded-r-3xl lg:right-72" />
+            <div className="absolute inset-y-0 right-1/2 w-full bg-yellow-200 rounded-r-3xl lg:right-72" />
             <svg
               className="absolute top-8 left-1/2 -ml-3 lg:-right-8 lg:left-auto lg:top-12"
               width={404}
@@ -33,7 +33,7 @@ export default function HeroWithQuoteAndStats(props) {
                     y={0}
                     width={4}
                     height={4}
-                    className="text-gray-200"
+                    className="text-red-300"
                     fill="currentColor"
                   />
                 </pattern>
@@ -45,19 +45,18 @@ export default function HeroWithQuoteAndStats(props) {
             {/* Testimonial card */}
             <div className="relative pt-64 pb-10 rounded-2xl shadow-xl overflow-hidden">
               <img className="absolute inset-0 h-full w-full object-cover" src={imgUrl} alt="" />
-              <div
-                className="absolute inset-0 bg-indigo-500"
-                style={{ mixBlendMode: 'multiply' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-indigo-600 via-indigo-600 opacity-90" />
+              <div className="absolute inset-0" style={{ mixBlendMode: 'multiply' }} />
+              <div className="absolute inset-0" />
               <div className="relative px-8">
-                <div>
-                  <img className="h-12" src={logoUrl} alt="logo" />
-                </div>
+                {logoUrl && (
+                  <div>
+                    <img className="h-12" src={logoUrl} alt="" />
+                  </div>
+                )}
                 <blockquote className="mt-8">
                   <div className="relative text-lg font-medium text-white md:flex-grow">
                     <svg
-                      className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-indigo-400"
+                      className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-blue-400"
                       fill="currentColor"
                       viewBox="0 0 32 32"
                       aria-hidden="true"
@@ -68,7 +67,7 @@ export default function HeroWithQuoteAndStats(props) {
                   </div>
 
                   <footer className="mt-4">
-                    <p className="text-base font-semibold text-indigo-200">{name}</p>
+                    <p className="text-base font-semibold text-blue-200">{name}</p>
                   </footer>
                 </blockquote>
               </div>
@@ -116,7 +115,7 @@ HeroWithQuoteAndStats.defaultProps = {
   caption: '',
   synopsis: '',
   content: '',
-  logoUrl: 'https://tailwindui.com/img/logos/workcation.svg?color=white',
+  logoUrl: undefined,
   imgUrl:
     'https://images.unsplash.com/photo-1521510895919-46920266ddb3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-100',
 };
