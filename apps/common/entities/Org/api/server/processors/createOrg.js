@@ -11,7 +11,7 @@ const createOrg = (args, host, party) => {
   const newDoc = {
     name: args.name,
     logoUrl: Meteor.settings.public.default.logoUrl,
-    type: 'Company',
+    type: 'Organization',
     status: 'Draft',
     hosts: {},
   };

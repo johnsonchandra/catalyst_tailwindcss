@@ -69,7 +69,11 @@ export default function NavbarTop(props) {
                     <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                       <span className="sr-only">{name}</span>
                       <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-100">
-                        {user.logoUrl ? <img src={user.logoUrl} alt={name} /> : <Anon />}
+                        {user.profile.Image_User_PP ? (
+                          <img src={user.profile.Image_User_PP} alt={name} />
+                        ) : (
+                          <Anon />
+                        )}
                       </div>
 
                       {/* <img */}

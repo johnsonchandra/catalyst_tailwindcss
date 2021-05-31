@@ -80,7 +80,7 @@ const getFileJSONdefs = (publishName, props) => {
       auth: ['member', 'spv'],
     },
     saveFileToS3: {
-      auth: ['member', 'spv'],
+      auth: ['user', 'member', 'spv'], // FIXME harap buat method name yg lain buat user baru signup bisa upload ktp
     },
     updateFile: {
       auth: ['member', 'spv'],

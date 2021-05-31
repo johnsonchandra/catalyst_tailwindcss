@@ -6,7 +6,8 @@ import NavbarTop from './NavbarTop';
 
 export default function SidebarWithSearchAndAvatar(props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { currentPageName, navigations, children, user, name, searchForm, createDoc } = props;
+  const { currentPageName, navigations, children, user, name, searchForm, createDoc, settings } =
+    props;
 
   return (
     <div className="h-screen flex overflow-hidden">
@@ -15,6 +16,7 @@ export default function SidebarWithSearchAndAvatar(props) {
         setSidebarOpen={setSidebarOpen}
         currentPageName={currentPageName}
         navigations={navigations}
+        settings={settings}
       />
       <NavbarTop
         setSidebarOpen={setSidebarOpen}
@@ -45,4 +47,5 @@ SidebarWithSearchAndAvatar.propTypes = {
   name: PropTypes.string,
   searchForm: PropTypes.func,
   createDoc: PropTypes.func,
+  settings: PropTypes.object.isRequired,
 };

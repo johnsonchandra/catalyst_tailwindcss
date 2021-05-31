@@ -30,6 +30,9 @@ export default `
     phone: String
     roles: [Role]
     settings: [UserSetting]
+    Image_User_PP: String
+    Image_User_Cover: String
+    Image_User_IDCard: String
   }
 
   type UserExportDataZip {

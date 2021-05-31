@@ -13,7 +13,7 @@ import { detailUser } from '../utils/queries.gql';
 
 import { updateUserRoles as updateUserRolesMutation } from '../utils/mutations.gql';
 
-class UserProfile extends React.Component {
+class UserRoles extends React.Component {
   handleSubmit = () => {
     const { data, updateUserRoles } = this.props;
     const roleCheckboxes = document.querySelectorAll('[name="checkboxitem"]:checked');
@@ -122,11 +122,11 @@ class UserProfile extends React.Component {
   }
 }
 
-UserProfile.defaultProps = {
+UserRoles.defaultProps = {
   disabled: true,
 };
 
-UserProfile.propTypes = {
+UserRoles.propTypes = {
   data: PropTypes.object.isRequired,
   disabled: PropTypes.bool,
   updateUserRoles: PropTypes.func.isRequired,
@@ -153,4 +153,4 @@ export default compose(
       },
     }),
   }),
-)(withApollo(UserProfile));
+)(withApollo(UserRoles));

@@ -1,13 +1,6 @@
 import commonFields from '../../../common_fields';
 
 export default `
-  enum OrgType {
-    Company
-    Division
-    Department
-    PersonalMerchant
-    Other
-  }
   enum OrgStatus {
     Draft
     Queue
@@ -31,7 +24,7 @@ export default `
     latitude: Float
     longitude: Float
     
-    type: OrgType
+    type: String
     status: OrgStatus
     
     Users: [User]

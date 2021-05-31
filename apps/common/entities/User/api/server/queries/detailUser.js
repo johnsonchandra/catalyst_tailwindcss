@@ -99,6 +99,9 @@ const action = (userToShow, context, tenant, host) => {
     emailAddress: selfOrHostAdmin && userToShow.emails[0].address,
     roles,
     settings: selfOrHostAdmin && settings,
+    Image_User_PP: userToShow.profile.Image_User_PP,
+    Image_User_Cover: userToShow.profile.Image_User_Cover,
+    Image_User_IDCard: userToShow.profile.Image_User_IDCard,
     // below is to comply with party type
     name: userToShow.profile.fullname,
     type: 'Member',

@@ -3,34 +3,46 @@
 import { Meteor } from 'meteor/meteor';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class UserLogin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      disabled: false,
+      labelButton: 'Sign In',
+    };
+  }
+
   handleSubmit = (form) => {
+    this.setState({
+      disabled: true,
+      labelButton: 'Signing In...',
+    });
+
     Meteor.loginWithPassword(form.email.value, form.password.value, (error) => {
       if (error) alert(error.reason);
+      this.setState({
+        disabled: false,
+        labelButton: 'Sign In',
+      });
     });
   };
 
   render() {
+    const { settings } = this.props;
+    const { logoUrlPopUp } = settings;
+
+    const { disabled, labelButton } = this.state;
+
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          {/* FIXME make logo softcode */}
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark.svg?color=emerald&shade=300"
-            alt="Workflow"
-          />
+          <img className="mx-auto w-auto" src={logoUrlPopUp} alt="Logo" />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{' '}
-            <Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
-              sign up
-            </Link>
-          </p>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -82,6 +94,7 @@ class UserLogin extends React.Component {
                     name="remember_me"
                     type="checkbox"
                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    defaultChecked
                   />
                   <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
                     Remember me
@@ -102,16 +115,32 @@ class UserLogin extends React.Component {
                 <button
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  disabled={disabled}
                 >
-                  Sign in
+                  {labelButton}
                 </button>
               </div>
             </form>
           </div>
         </div>
+        <p className="mt-2 text-center text-sm text-gray-600">
+          Or{' '}
+          <Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
+            sign up
+          </Link>
+        </p>
+        <p className="mt-2 text-center text-sm text-gray-600">
+          <Link to="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+            Home
+          </Link>
+        </p>
       </div>
     );
   }
 }
 
 export default UserLogin;
+
+UserLogin.propTypes = {
+  settings: PropTypes.object.isRequired,
+};

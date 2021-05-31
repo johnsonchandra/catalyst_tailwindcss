@@ -5,6 +5,10 @@ fragment UserAttributes on User {
   emailAddress
   phone
 
+  Image_User_PP
+  Image_User_Cover
+  Image_User_IDCard
+
   roles {
     name
     value

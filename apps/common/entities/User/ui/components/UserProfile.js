@@ -1,22 +1,105 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-associated-control, camelcase */
+
 import { Accounts } from 'meteor/accounts-base';
+import { Tracker } from 'meteor/tracker';
+import { Slingshot } from 'meteor/edgee:slingshot';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import autoBind from 'react-autobind/src/autoBind';
+
 import { graphql, withApollo } from 'react-apollo';
 
-import { flowRight as compose } from 'lodash';
+import _, { flowRight as compose } from 'lodash';
 
 import Loading from '../../../../ui/components/Loading';
 import BlankState from '../../../../ui/components/BlankState';
 import Validation from '../../../../ui/components/Validation';
 import Anon from '../../../../ui/components/Anon';
 
+import roundPercentage from '../../../../helpers/roundPercentage';
+
 import { detailUser } from '../utils/queries.gql';
 
 import { updateUser as updateUserMutation } from '../utils/mutations.gql';
 
 class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    autoBind(this);
+
+    this.state = {
+      pp: null,
+      cover: null,
+      progress_Image_User_PP: '',
+      progress_Image_User_Cover: '',
+    };
+  }
+
+  handleUploadCover(event) {
+    this.setState({
+      cover: URL.createObjectURL(event.target.files[0]),
+    });
+    this.beginFileUpload(event, 'Image_User_Cover');
+  }
+
+  handleUploadPp(event) {
+    this.setState({
+      pp: URL.createObjectURL(event.target.files[0]),
+    });
+    this.beginFileUpload(event, 'Image_User_PP');
+  }
+
+  beginFileUpload = (event, type) => {
+    const input = event.target;
+    _.each(input.files, (file) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        this.preparingUpload(file, type, undefined, undefined);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  preparingUpload = (file, type, typeId, refs) => {
+    const metaContext = {
+      entity: 'User',
+      entityId: undefined, // special case, auto inject in backend
+      type,
+      refs,
+    };
+
+    let computation;
+    const uploader = new Slingshot.Upload('saveFileToS3', metaContext);
+    if (uploader.validate(file)) alert('Error uploading...');
+
+    uploader.send(file, (error, response) => {
+      computation.stop();
+      if (error) {
+        alert(`Error uploading...${error}`);
+        this.setState({ [`progress_${type}`]: 'Error' });
+      } else {
+        this.setState({ [`progress_${type}`]: '' });
+
+        const { history, routeAfter } = this.props;
+        if (routeAfter)
+          history.push(
+            routeAfter === 'filedetail'
+              ? `/File/${response.substring(response.lastIndexOf('/') + 1)}`
+              : routeAfter,
+          );
+      }
+    });
+
+    computation = Tracker.autorun(() => {
+      if (!isNaN(uploader.progress())) {
+        this.setState({
+          [`progress_${type}`]: `${roundPercentage(uploader.progress() * 100, 0)} %`,
+        });
+      }
+    });
+  };
+
   handleSubmit = (form) => {
     const { updateUser, data } = this.props;
     updateUser({
@@ -53,6 +136,8 @@ class UserProfile extends React.Component {
 
   render() {
     const { data, match } = this.props;
+    const { pp, cover, progress_Image_User_PP, progress_Image_User_Cover } = this.state;
+
     if (data.loading) return <Loading />;
     if (!data.detailUser)
       return (
@@ -136,58 +221,85 @@ class UserProfile extends React.Component {
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
                     <div className="flex items-center">
                       <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                        <Anon />
+                        {/* eslint-disable-next-line no-nested-ternary */}
+                        {pp ? (
+                          <img src={pp} alt="pp" />
+                        ) : data.detailUser.Image_User_PP ? (
+                          <img src={data.detailUser.Image_User_PP} alt="pp" />
+                        ) : (
+                          <Anon />
+                        )}
                       </span>
-                      <button
-                        type="button"
-                        className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      >
-                        Change
-                      </button>
+                      <div className="flex text-sm text-gray-600">
+                        <label
+                          htmlFor="pp-upload"
+                          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                        >
+                          <span>Upload Profile Picture {progress_Image_User_PP}</span>
+                          <input
+                            id="pp-upload"
+                            name="pp-upload"
+                            type="file"
+                            className="sr-only"
+                            onChange={this.handleUploadPp}
+                          />
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
-                    htmlFor="cover_photo"
+                    htmlFor="cover_image"
                     className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                   >
-                    Cover photo
+                    Cover Image
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
                     <div className="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                       <div className="space-y-1 text-center">
-                        <svg
-                          className="mx-auto h-12 w-12 text-gray-400"
-                          stroke="currentColor"
-                          fill="none"
-                          viewBox="0 0 48 48"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                            strokeWidth={2}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        {/* eslint-disable-next-line no-nested-ternary */}
+                        {cover ? (
+                          <img src={cover} alt="cover" />
+                        ) : data.detailUser.Image_User_Cover ? (
+                          <img src={data.detailUser.Image_User_Cover} alt="cover" />
+                        ) : (
+                          <svg
+                            className="mx-auto h-12 w-12 text-gray-400"
+                            stroke="currentColor"
+                            fill="none"
+                            viewBox="0 0 48 48"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                              strokeWidth={2}
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        )}
+
                         <div className="flex text-sm text-gray-600">
                           <label
-                            htmlFor="file-upload"
+                            htmlFor="cover-upload"
                             className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
-                            <span>Upload a file</span>
+                            <span>Upload Cover Image</span>
                             <input
-                              id="file-upload"
-                              name="file-upload"
+                              id="cover-upload"
+                              name="cover-upload"
                               type="file"
                               className="sr-only"
+                              onChange={this.handleUploadCover}
                             />
                           </label>
                           <p className="pl-1">or drag and drop</p>
                         </div>
-                        <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+
+                        <p className="text-xs text-gray-500">PNG, JPG, GIF up to 1 MB</p>
+                        <p className="text-xs text-gray-500">{progress_Image_User_Cover}</p>
                       </div>
                     </div>
                   </div>
@@ -347,10 +459,16 @@ class UserProfile extends React.Component {
   }
 }
 
+UserProfile.defaultProps = {
+  routeAfter: undefined,
+};
+
 UserProfile.propTypes = {
   data: PropTypes.object.isRequired,
   updateUser: PropTypes.func.isRequired,
+  routeAfter: PropTypes.string,
   match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default compose(

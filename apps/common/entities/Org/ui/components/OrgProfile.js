@@ -35,7 +35,7 @@ class OrgProfile extends React.Component {
       city: form.city.value,
       state: form.state.value,
       country: form.country.value,
-      // type: form.type.value,
+      type: form.type.value,
       description: form.description.value,
     };
     updateDoc({
@@ -353,6 +353,27 @@ class OrgProfile extends React.Component {
                     defaultValue={data.detailOrg.country}
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                   />
+                </div>
+              </div>
+
+              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label
+                  htmlFor="type"
+                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                >
+                  Tipe
+                </label>
+                <div className="mt-1 sm:mt-0 sm:col-span-2">
+                  <select
+                    id="type"
+                    name="type"
+                    className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                    defaultValue={data.detailOrg.type || 'Pokja'}
+                  >
+                    {['Company', 'Department', 'Division', 'Organization'].map((tipe) => (
+                      <option key={tipe}>{tipe}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
