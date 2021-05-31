@@ -3,18 +3,25 @@ import { iso, timeago } from '../../../../helpers/dates';
 import parseHost from '../../../../helpers/parseHost';
 import parseDotToUnderscore from '../../../../helpers/parseDotToUnderscore';
 
-const UserParser = (docs, settings) => {
-  return parseDocs(docs, [
+const UserParser = (docs, settings, roles) => {
+  const parsedDocs = parseDocs(docs, [
     { from: '_id', to: '_id' },
     { from: (doc) => doc.profile && doc.profile.fullname, to: 'fullname' },
     {
-      from: (doc) => {
-        const email = doc.emails && doc.emails[0] && doc.emails[0].address;
-        const verified =
-          doc.emails && doc.emails[0] && doc.emails[0].verified ? '' : '[not verified]';
-        return `${email}${verified}`;
-      },
+      from: (doc) => doc.emails && doc.emails[0] && doc.emails[0].address,
       to: 'email',
+    },
+    {
+      from: (doc) => {
+        const emailVerified =
+          doc.emails && doc.emails[0] && doc.emails[0].verified
+            ? 'Email Verified'
+            : 'Email Not Verified';
+        const idUploaded =
+          doc.profile && doc.profile.Image_User_IDCard ? 'ID Uploaded' : 'ID Not Uploaded';
+        return `${emailVerified}/${idUploaded}`;
+      },
+      to: 'Verification',
     },
     { from: (doc) => doc.profile && doc.profile.phone, to: 'phone' },
     {
@@ -50,6 +57,14 @@ const UserParser = (docs, settings) => {
       to: 'linkUrl',
     },
   ]);
+
+  return roles.indexOf('root') < 0
+    ? parsedDocs.map((parsedDoc) => {
+        const doc = { ...parsedDoc };
+        delete doc.allLastLogin;
+        return doc;
+      })
+    : parsedDocs;
 };
 
 export default UserParser;

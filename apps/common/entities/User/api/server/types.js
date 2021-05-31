@@ -1,5 +1,7 @@
 import commonFields from '../../../common_fields';
 
+// FIXME IDCard still push to Frontend, maybe we should make other type beside detailUser?
+
 export default `
   type Role {
     name: String

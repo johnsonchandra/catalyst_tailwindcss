@@ -8,6 +8,30 @@ const getUserJSONdefs = (publishName, props) => {
   ];
 
   const defs = {
+    listUserEmailUnverifiedAll: {
+      // no auth here, special case for super admin
+      query: { _id: { $ne: props && props._id }, 'emails.verified': { $ne: true } },
+      fields: { profile: 1, emails: 1, status: 1, hosts: 1 },
+      queryOr: queryOr(props),
+    },
+    listUserEmailUnverifiedHost: {
+      auth: ['admin'],
+      query: { _id: { $ne: props && props._id }, 'emails.verified': { $ne: true } }, // in pubProcessorUser hosts will be added
+      fields: { profile: 1, emails: 1, status: 1 },
+      queryOr: queryOr(props),
+    },
+    listUserIDNotUploadedAll: {
+      // no auth here, special case for super admin
+      query: { _id: { $ne: props && props._id }, 'profile.Image_User_IDCard': { $exists: false } },
+      fields: { profile: 1, emails: 1, status: 1, hosts: 1 },
+      queryOr: queryOr(props),
+    },
+    listUserIDNotUploadedHost: {
+      auth: ['admin'],
+      query: { _id: { $ne: props && props._id }, 'profile.Image_User_IDCard': { $exists: false } },
+      fields: { profile: 1, emails: 1, status: 1 },
+      queryOr: queryOr(props),
+    },
     listUserCurrentAll: {
       // no auth here, special case for super admin
       query: { _id: { $ne: props && props._id } },

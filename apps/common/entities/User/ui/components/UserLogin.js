@@ -23,10 +23,6 @@ class UserLogin extends React.Component {
 
     Meteor.loginWithPassword(form.email.value, form.password.value, (error) => {
       if (error) alert(error.reason);
-      this.setState({
-        disabled: false,
-        labelButton: 'Sign In',
-      });
     });
   };
 

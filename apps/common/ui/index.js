@@ -29,6 +29,8 @@ import Home from './pages/Home';
 import Dashboard from './pages/Home/Dashboard';
 
 // Root Pages
+import UserListEmailUnverifiedAllPage from './pages/Root/User/UserListEmailUnverifiedAllPage';
+import UserListIDNotUploadedAllPage from './pages/Root/User/UserListIDNotUploadedAllPage';
 import UserListCurrentAllPage from './pages/Root/User/UserListCurrentAllPage';
 import UserListOnlineAllPage from './pages/Root/User/UserListOnlineAllPage';
 
@@ -42,6 +44,8 @@ import TenantListCurrentAllPage from './pages/Root/Tenant/TenantListCurrentAllPa
 import TenantListHistoryAllPage from './pages/Root/Tenant/TenantListHistoryAllPage';
 
 // Admin Pages
+import UserListEmailUnverifiedHostPage from './pages/Admin/User/UserListEmailUnverifiedHostPage';
+import UserListIDNotUploadedHostPage from './pages/Admin/User/UserListIDNotUploadedHostPage';
 import UserListCurrentHostPage from './pages/Admin/User/UserListCurrentHostPage';
 import UserListOnlineHostPage from './pages/Admin/User/UserListOnlineHostPage';
 
@@ -63,6 +67,7 @@ import DocumentListHistoryPage from './pages/Member/Document/List/DocumentListHi
 // User Pages
 import UserProfilePage from './pages/User/Profile';
 import UserRolesPage from './pages/User/Profile/Roles';
+import UserIdCardPage from './pages/User/Profile/IdCard';
 
 // Web Pages
 import AboutPage from './pages/About';
@@ -151,6 +156,26 @@ class CommonApp extends React.Component {
 
           {/* ROOT */}
 
+          <Authorized
+            exact
+            allowedRoles={['root']}
+            path="/Root/User/List/EmailUnverified/All"
+            pathAfterFailure="/dashboard"
+            component={UserListEmailUnverifiedAllPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['root']}
+            path="/Root/User/List/IDNotUploaded/All"
+            pathAfterFailure="/dashboard"
+            component={UserListIDNotUploadedAllPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
           <Authorized
             exact
             allowedRoles={['root']}
@@ -248,6 +273,26 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
+            path="/Admin/User/List/EmailUnverified/Host"
+            pathAfterFailure="/dashboard"
+            component={UserListEmailUnverifiedHostPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['admin']}
+            path="/Admin/User/List/IDNotUploaded/Host"
+            pathAfterFailure="/dashboard"
+            component={UserListIDNotUploadedHostPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['admin']}
             path="/Admin/User/List/Current/Host"
             pathAfterFailure="/dashboard"
             component={UserListCurrentHostPage}
@@ -282,6 +327,16 @@ class CommonApp extends React.Component {
             path="/User/:_id/Roles"
             pathAfterFailure="/dashboard"
             component={UserRolesPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['admin']}
+            path="/User/:_id/idcard"
+            pathAfterFailure="/dashboard"
+            component={UserIdCardPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}
@@ -424,6 +479,14 @@ class CommonApp extends React.Component {
             exact
             path="/roles"
             component={UserRolesPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authenticated
+            exact
+            path="/idcard"
+            component={UserIdCardPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}

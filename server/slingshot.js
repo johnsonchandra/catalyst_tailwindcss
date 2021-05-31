@@ -4,19 +4,18 @@ import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { Slingshot } from 'meteor/edgee:slingshot';
 
-import _ from 'lodash';
-
 import authorizer from '../apps/common/helpers/server/authorizer';
 
 import getFileJSONdefs from '../apps/common/entities/File/api/utils/getFileJSONdefs';
 import parseFIleName from '../apps/common/helpers/parseFIleName';
 import createFile from '../apps/common/entities/File/api/server/processors/createFile';
+import entityUpdate from '../apps/common/helpers/server/entityUpdate';
 
 // FIXME [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead
 Slingshot.fileRestrictions('saveFileToS3', {
-  allowedFileTypes: /.*/i,
-  // allowedFileTypes: ['image/png', 'image/jpeg', 'image/jpg'],
-  maxSize: 10 * 1024 * 1024, // 10 MB (use null for unlimited).
+  // allowedFileTypes: /.*/i,
+  allowedFileTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
+  maxSize: 1 * 1024 * 1024, // 1 MB (use null for unlimited).
 });
 
 Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
@@ -27,7 +26,6 @@ Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
   region: Meteor.settings.private.s3.region || 'ap-southeast-1',
   authorize(file, metaContext) {
     try {
-      // FIXME not yet tested, please comply with existing env in S3
       const options = {
         context: {
           headers: {
@@ -37,23 +35,28 @@ Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
         },
       };
 
-      const { party, host, tenant } = authorizer(options, 'saveFileToS3', getFileJSONdefs);
-      const mimeTypeRoot = file.type.substring(0, file.type.indexOf('/'));
-      const upperFirstMetaContextType = _.upperFirst(metaContext.type);
-      const typeId = metaContext.typeId || party._id;
+      const { party, tenant } = authorizer(options, 'saveFileToS3', getFileJSONdefs);
 
-      const filename = `${Random.id()}.${file.name.substring(file.name.lastIndexOf('.') + 1)}`;
-      const cloudUrl = `${
-        Meteor.settings.private.s3.folder === 'host' ? host : Meteor.settings.private.s3.folder
-      }/${upperFirstMetaContextType}/${typeId}/${mimeTypeRoot}/${filename}`;
+      const mimeTypeRoot = file.type.substring(0, file.type.indexOf('/'));
+      const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1);
+      const filename = `${
+        metaContext.type.includes('User') ? metaContext.type : Random.id()
+      }.${fileExtension}`; // TODO end filename for User could be different because of the extension.
+
+      const entity = metaContext.entity || 'User';
+      const entityId = metaContext.entityId || party._id;
+
+      const folder = `${Meteor.settings.private.s3.folder}/${entity}/${entityId}/${mimeTypeRoot}/${filename}`;
+      const cloudUrl = tenant.s3RootFolder ? `${tenant.s3RootFolder}/${folder}` : folder;
 
       const docFile = {
         name: parseFIleName(file.name),
+        entity,
+        entityId,
         cloudUrl: `${Meteor.settings.public.cloudUrl}/${cloudUrl}`,
         size: file.size,
         mimeType: file.type,
-        typeId,
-        type: `${upperFirstMetaContextType}.${_.upperFirst(mimeTypeRoot)}`,
+        type: metaContext.type,
         status: 'Active',
         refs: metaContext.refs
           ? metaContext.refs
@@ -61,6 +64,13 @@ Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
       };
 
       const fileCreated = createFile(docFile, party, tenant);
+
+      // now special case if User Profile PP n User Profile Cover
+      if (metaContext.type.includes('User')) {
+        const docUser = {};
+        docUser[`profile.${metaContext.type}`] = `${Meteor.settings.public.cloudUrl}/${cloudUrl}`;
+        entityUpdate(Meteor.users, { _id: Meteor.userId() }, docUser, 'update user image', party);
+      }
 
       if (fileCreated && fileCreated._id) {
         metaContext._id = fileCreated._id;
@@ -70,12 +80,12 @@ Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
 
       return false;
     } catch (exception) {
-      console.log(`EXCEPTION - saveFileToS3 - userId: ${this.userId}`, exception);
+      console.error(`EXCEPTION - saveFileToS3 - userId: ${this.userId}`, exception);
       return false;
     }
   },
 
   key(file, metaContext) {
-    return metaContext._id;
+    return metaContext.cloudUrl;
   },
 });

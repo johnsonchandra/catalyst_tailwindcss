@@ -29,6 +29,7 @@ class PageUserList extends React.Component {
   render() {
     const { tabs, settings, history, roles, currentPageName, currentTabName, publishName } =
       this.props;
+
     const { search, currentPage } = this.state;
     const { perPage } = settings;
 
@@ -58,6 +59,7 @@ class PageUserList extends React.Component {
           currentPage={currentPage}
           perPage={perPage}
           onChangePage={(currentPageNow) => this.setState({ currentPage: currentPageNow })}
+          roles={roles}
         />
       </SidebarWithSearchAndAvatar>
     );

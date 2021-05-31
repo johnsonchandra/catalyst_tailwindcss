@@ -8,7 +8,7 @@ import Loading from '../components/Loading';
 
 import withTrackerSsr from '../../helpers/withTrackerSsr';
 
-const EntityList = (props) => {
+const UserList = (props) => {
   const {
     loading,
     docs,
@@ -20,6 +20,7 @@ const EntityList = (props) => {
     componentTable,
     componentPagination,
     parser,
+    roles,
   } = props;
 
   if (loading) return <Loading />;
@@ -27,7 +28,7 @@ const EntityList = (props) => {
   return (
     <>
       {React.createElement(componentTable, {
-        docs: parser(docs, settings),
+        docs: parser(docs, settings, roles),
         caption: `Last Updated: ${new Date().toLocaleString()}`,
       })}
       {React.createElement(componentPagination, {
@@ -40,7 +41,7 @@ const EntityList = (props) => {
   );
 };
 
-EntityList.defaultProps = {
+UserList.defaultProps = {
   loading: true,
   docs: [],
   total: 0,
@@ -49,8 +50,9 @@ EntityList.defaultProps = {
   onChangePage: () => {},
 };
 
-EntityList.propTypes = {
+UserList.propTypes = {
   loading: PropTypes.bool,
+  roles: PropTypes.arrayOf(PropTypes.string).isRequired,
   docs: PropTypes.arrayOf(PropTypes.object),
   total: PropTypes.number,
   perPage: PropTypes.number,
@@ -98,4 +100,4 @@ export default withTrackerSsr((props) => {
     };
   }
   return params;
-})(EntityList);
+})(UserList);

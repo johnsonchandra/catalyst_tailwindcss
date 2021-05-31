@@ -45,14 +45,12 @@ class UserSignup extends React.Component {
   };
 
   render() {
+    const { settings } = this.props;
+
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark.svg?color=emerald&shade=300"
-            alt="Workflow"
-          />
+          <img className="mx-auto w-auto" src={settings.logoUrlPopUp} alt="PHI" />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">SIGN UP</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{' '}
@@ -188,6 +186,7 @@ class UserSignup extends React.Component {
 }
 
 UserSignup.propTypes = {
+  settings: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   sendVerificationEmail: PropTypes.func.isRequired,
 };

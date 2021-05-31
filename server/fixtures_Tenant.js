@@ -29,11 +29,14 @@ if ((Meteor.isDevelopment || Meteor.settings.public.dbReset === 'enforce') && !t
       roles: ['user', 'member', 'spv', 'admin'],
       rolesUserInOrg: ['member', 'admin'],
       rolesOrgInTenant: ['member', 'owner'],
+      s3RootFolder: 'common.maya',
       type: 'Host',
       status: 'Active',
       settings: {
         name: 'Catalyst Engine',
-        description: 'Catalyst your Development',
+        description: 'Catalyst Engine Application for your Development',
+        motto: 'Catalyst your Development',
+        copyright: 'PT Maya Katalis Cipta Buana',
         iconUrl: '/mkcb.ico',
         logoUrl:
           'https://s3-ap-southeast-1.amazonaws.com/gudang.maya.network/mkcb/img/mkcb_logo_small.png',
@@ -57,11 +60,14 @@ if ((Meteor.isDevelopment || Meteor.settings.public.dbReset === 'enforce') && !t
       roles: ['user', 'member', 'spv', 'admin'],
       rolesUserInOrg: ['member', 'admin'],
       rolesOrgInTenant: ['member', 'owner'],
+      s3RootFolder: 'example.maya',
       type: 'Host',
       status: 'Active',
       settings: {
         name: 'Example',
         description: 'Example Application of Catalyst Engine',
+        motto: 'Catalyst your Development',
+        copyright: 'PT Maya Katalis Cipta Buana',
         iconUrl: '/mkcb.ico',
         logoUrl:
           'https://s3-ap-southeast-1.amazonaws.com/gudang.maya.network/mkcb/img/mkcb_logo_small.png',
@@ -85,11 +91,14 @@ if ((Meteor.isDevelopment || Meteor.settings.public.dbReset === 'enforce') && !t
       roles: ['user', 'member', 'spv', 'admin'],
       rolesUserInOrg: ['member', 'admin'],
       rolesOrgInTenant: ['member', 'owner'],
+      s3RootFolder: 'example.maya',
       type: 'Host',
       status: 'Active',
       settings: {
         name: 'Localhost',
         description: 'Localhost Application',
+        motto: 'Localhost',
+        copyright: 'Localhost',
         iconUrl: '/mkcb.ico',
         logoUrl:
           'https://s3-ap-southeast-1.amazonaws.com/gudang.maya.network/mkcb/img/mkcb_logo_small.png',
