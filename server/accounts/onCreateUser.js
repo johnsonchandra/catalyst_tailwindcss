@@ -11,6 +11,7 @@ Accounts.onCreateUser((options, user) => {
   const settings = UserSetting.find({ host: options.host }).fetch();
   userToCreate.hosts = {};
   userToCreate.hosts[parseDotToUnderscore(options.host)] = {
+    approved: false,
     settings,
     visit: {
       first: {

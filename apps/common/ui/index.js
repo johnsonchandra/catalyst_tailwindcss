@@ -29,8 +29,7 @@ import Home from './pages/Home';
 import Dashboard from './pages/Home/Dashboard';
 
 // Root Pages
-import UserListEmailUnverifiedAllPage from './pages/Root/User/UserListEmailUnverifiedAllPage';
-import UserListIDNotUploadedAllPage from './pages/Root/User/UserListIDNotUploadedAllPage';
+import UserListUnverifiedAllPage from './pages/Root/User/UserListUnverifiedAllPage';
 import UserListCurrentAllPage from './pages/Root/User/UserListCurrentAllPage';
 import UserListOnlineAllPage from './pages/Root/User/UserListOnlineAllPage';
 
@@ -44,8 +43,9 @@ import TenantListCurrentAllPage from './pages/Root/Tenant/TenantListCurrentAllPa
 import TenantListHistoryAllPage from './pages/Root/Tenant/TenantListHistoryAllPage';
 
 // Admin Pages
-import UserListEmailUnverifiedHostPage from './pages/Admin/User/UserListEmailUnverifiedHostPage';
-import UserListIDNotUploadedHostPage from './pages/Admin/User/UserListIDNotUploadedHostPage';
+import UserListUnverifiedHostPage from './pages/Admin/User/UserListUnverifiedHostPage';
+import UserListWaitingApprovalHostPage from './pages/Admin/User/UserListWaitingApprovalHostPage';
+import UserListApprovedHostPage from './pages/Admin/User/UserListApprovedHostPage';
 import UserListCurrentHostPage from './pages/Admin/User/UserListCurrentHostPage';
 import UserListOnlineHostPage from './pages/Admin/User/UserListOnlineHostPage';
 
@@ -159,19 +159,9 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/User/List/EmailUnverified/All"
+            path="/Root/User/List/Unverified/All"
             pathAfterFailure="/dashboard"
-            component={UserListEmailUnverifiedAllPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authorized
-            exact
-            allowedRoles={['root']}
-            path="/Root/User/List/IDNotUploaded/All"
-            pathAfterFailure="/dashboard"
-            component={UserListIDNotUploadedAllPage}
+            component={UserListUnverifiedAllPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}
@@ -273,9 +263,9 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
-            path="/Admin/User/List/EmailUnverified/Host"
+            path="/Admin/User/List/Unverified/Host"
             pathAfterFailure="/dashboard"
-            component={UserListEmailUnverifiedHostPage}
+            component={UserListUnverifiedHostPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}
@@ -283,9 +273,19 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
-            path="/Admin/User/List/IDNotUploaded/Host"
+            path="/Admin/User/List/WaitingApproval/Host"
             pathAfterFailure="/dashboard"
-            component={UserListIDNotUploadedHostPage}
+            component={UserListWaitingApprovalHostPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['admin']}
+            path="/Admin/User/List/Approved/Host"
+            pathAfterFailure="/dashboard"
+            component={UserListApprovedHostPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}

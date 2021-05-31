@@ -3,15 +3,16 @@
 import React from 'react';
 
 import PageUserList from '../../PageUserList';
+
 import tabs from './tabs';
 
-export default function UserListEmailUnverifiedAllPage(props) {
+export default function UserListWaitingApprovalHostPage(props) {
   return (
     <PageUserList
       tabs={tabs}
-      currentPageName="User All Tenant"
-      currentTabName="Email Unverified"
-      publishName="listUserEmailUnverifiedAll"
+      currentPageName="User"
+      currentTabName="Waiting Approval"
+      publishName="listUserWaitingApprovalHost"
       {...props}
     />
   );

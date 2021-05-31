@@ -18,6 +18,7 @@ Slingshot.fileRestrictions('saveFileToS3', {
   maxSize: 1 * 1024 * 1024, // 1 MB (use null for unlimited).
 });
 
+// FIXME admin belum bisa upload foto untuk user, baru diri sendiri yang bisa
 Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
   AWSAccessKeyId: Meteor.settings.private.s3.accessKey,
   AWSSecretAccessKey: Meteor.settings.private.s3.secretKey,

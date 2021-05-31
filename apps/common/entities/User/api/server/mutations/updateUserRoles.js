@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 
 import _ from 'lodash';
 
@@ -12,6 +13,7 @@ import processRoles from '../../../../../helpers/server/processRoles';
 
 import Tenant from '../../../../Tenant/api';
 import Org from '../../../../Org/api';
+import parseDotToUnderscore from '../../../../../helpers/parseDotToUnderscore';
 
 const processOrgRoles = (_id, scopes, host) => {
   const orgs = Org.find(getQueryHostExist(host), {
@@ -44,7 +46,18 @@ const updateRoles = ({ _id, roles }, party, host) => {
     });
   }
 
-  return entityUpdate(Meteor.users, { _id }, {}, `update roles to ${JSON.stringify(roles)}`, party);
+  const rolesInCurrentHost = Roles.getRolesForUser(_id, host);
+  const docUser = {};
+  docUser[`hosts.${parseDotToUnderscore(host)}.approved`] =
+    rolesInCurrentHost.indexOf('member') > -1;
+
+  return entityUpdate(
+    Meteor.users,
+    { _id },
+    docUser,
+    `update roles to ${JSON.stringify(roles)}`,
+    party,
+  );
 };
 
 const updateUserRoles = (options, resolve, reject) => {

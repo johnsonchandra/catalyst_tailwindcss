@@ -5,13 +5,13 @@ import React from 'react';
 import PageUserList from '../../PageUserList';
 import tabs from './tabs';
 
-export default function UserListIDNotUploadedAllPage(props) {
+export default function UserListUnverifiedAllPage(props) {
   return (
     <PageUserList
       tabs={tabs}
       currentPageName="User All Tenant"
-      currentTabName="ID Not Uploaded"
-      publishName="listUserIDNotUploadedAll"
+      currentTabName="Unverified"
+      publishName="listUserUnverifiedAll"
       {...props}
     />
   );

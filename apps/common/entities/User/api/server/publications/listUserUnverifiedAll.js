@@ -5,7 +5,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import getUserJSONdefs from '../../utils/getUserJSONdefs';
 import getQueryAndProjectionForRootAdmin from '../../../../../helpers/getQueryAndProjectionForRootAdmin';
 
-const publishName = 'listUserEmailUnverifiedAll';
+const publishName = 'listUserUnverifiedAll';
 Meteor.publish(publishName, function pub(props) {
   check(props, Object);
   try {

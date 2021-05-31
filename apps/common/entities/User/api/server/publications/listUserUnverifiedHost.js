@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import getUserJSONdefs from '../../utils/getUserJSONdefs';
 import pubProcessorUser from '../../utils/pubProcessorUser';
 
-const publishName = 'listUserEmailUnverifiedHost';
+const publishName = 'listUserUnverifiedHost';
 Meteor.publish(publishName, function pub(props) {
   check(props, Object);
   try {

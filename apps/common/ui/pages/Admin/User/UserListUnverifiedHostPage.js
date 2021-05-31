@@ -6,13 +6,13 @@ import PageUserList from '../../PageUserList';
 
 import tabs from './tabs';
 
-export default function UserListEmailUnverifiedHostPage(props) {
+export default function UserListUnverifiedHostPage(props) {
   return (
     <PageUserList
       tabs={tabs}
       currentPageName="User"
-      currentTabName="Email Unverified"
-      publishName="listUserEmailUnverifiedHost"
+      currentTabName="Unverified"
+      publishName="listUserUnverifiedHost"
       {...props}
     />
   );

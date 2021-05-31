@@ -6,13 +6,13 @@ import PageUserList from '../../PageUserList';
 
 import tabs from './tabs';
 
-export default function UserListIDNotUploadedHostPage(props) {
+export default function UserListApprovedHostPage(props) {
   return (
     <PageUserList
       tabs={tabs}
       currentPageName="User"
-      currentTabName="ID Not Uploaded"
-      publishName="listUserIDNotUploadedHost"
+      currentTabName="Approved"
+      publishName="listUserApprovedHost"
       {...props}
     />
   );

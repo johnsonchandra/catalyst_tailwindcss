@@ -5,7 +5,7 @@ const navigations = [
     _id: 91,
     sequenceNr: 91,
     name: 'User All Tenant',
-    linkUrl: '/Root/User/List/Current/All',
+    linkUrl: '/Root/User/List/Online/All',
     icon: UserIcon,
   },
   {

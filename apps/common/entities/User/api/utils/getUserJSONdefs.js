@@ -8,27 +8,49 @@ const getUserJSONdefs = (publishName, props) => {
   ];
 
   const defs = {
-    listUserEmailUnverifiedAll: {
+    listUserUnverifiedAll: {
       // no auth here, special case for super admin
-      query: { _id: { $ne: props && props._id }, 'emails.verified': { $ne: true } },
+      query: {
+        _id: { $ne: props && props._id },
+        // FIXME do not use $or here cause it will be overwritten in search
+        $or: [
+          { 'emails.verified': { $ne: true } },
+          { 'profile.Image_User_IDCard': { $exists: false } },
+        ],
+      },
       fields: { profile: 1, emails: 1, status: 1, hosts: 1 },
       queryOr: queryOr(props),
     },
-    listUserEmailUnverifiedHost: {
+    listUserUnverifiedHost: {
       auth: ['admin'],
-      query: { _id: { $ne: props && props._id }, 'emails.verified': { $ne: true } }, // in pubProcessorUser hosts will be added
+      query: {
+        _id: { $ne: props && props._id },
+        // FIXME do not use $or here cause it will be overwritten in search
+        $or: [
+          { 'emails.verified': { $ne: true } },
+          { 'profile.Image_User_IDCard': { $exists: false } },
+        ],
+      },
       fields: { profile: 1, emails: 1, status: 1 },
       queryOr: queryOr(props),
     },
-    listUserIDNotUploadedAll: {
-      // no auth here, special case for super admin
-      query: { _id: { $ne: props && props._id }, 'profile.Image_User_IDCard': { $exists: false } },
-      fields: { profile: 1, emails: 1, status: 1, hosts: 1 },
+    listUserWaitingApprovalHost: {
+      auth: ['admin'],
+      query: {
+        _id: { $ne: props && props._id },
+        'emails.verified': { $eq: true },
+        'profile.Image_User_IDCard': { $exists: true }, // hosts fields are injected in logic
+      },
+      fields: { profile: 1, emails: 1, status: 1 },
       queryOr: queryOr(props),
     },
-    listUserIDNotUploadedHost: {
+    listUserApprovedHost: {
       auth: ['admin'],
-      query: { _id: { $ne: props && props._id }, 'profile.Image_User_IDCard': { $exists: false } },
+      query: {
+        _id: { $ne: props && props._id },
+        'emails.verified': { $eq: true },
+        'profile.Image_User_IDCard': { $exists: true }, // hosts fields are injected in logic
+      },
       fields: { profile: 1, emails: 1, status: 1 },
       queryOr: queryOr(props),
     },

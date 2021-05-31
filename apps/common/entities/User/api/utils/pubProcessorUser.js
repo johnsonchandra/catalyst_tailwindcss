@@ -7,7 +7,7 @@ import checkAuth from '../../../../helpers/checkAuth';
 import getProjection from '../../../../helpers/getProjection';
 import parseDotToUnderscore from '../../../../helpers/parseDotToUnderscore';
 
-const pubProcessorUser = (Entity, publishName, getJSONdefs, props, parent) => {
+const pubProcessorUser = (Entity, publishName, getJSONdefs, props, parent, approvedQuery) => {
   const host = parseHost(parent.connection.httpHeaders.host);
   const { auth, fields } = getJSONdefs(publishName, { ...props, _id: Meteor.userId() });
 
@@ -22,6 +22,7 @@ const pubProcessorUser = (Entity, publishName, getJSONdefs, props, parent) => {
     ...getJSONdefs(publishName, { ...options, _id: Meteor.userId() }).query,
   };
   query[fieldHost] = { $exists: true };
+  if (approvedQuery) query[`${fieldHost}.approved`] = approvedQuery;
 
   if (options.search) query.$or = getJSONdefs(publishName, options).queryOr;
 
