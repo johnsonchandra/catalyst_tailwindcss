@@ -1,4 +1,8 @@
-# tailwind Meteor example
+
+# Catalyst Engine with Meteor and Tailwindcss
+
+## Meteor setup
+Follow  [installation page](https://www.meteor.com/developers/install) of Meteor.
 
 ## Tailwind setup
 
@@ -40,7 +44,14 @@ See [main.css](client/main.css) as example.
 
 See [tailwind.config.js](tailwind.config.js) as example.
 
-## Running the example
+## Running the Application
+
+### /etc/hosts
+please add in /etc/hosts
+```bash
+127.0.0.1 common.maya
+127.0.0.1 example.maya
+```
 
 ### Install dependencies
 
@@ -51,7 +62,14 @@ meteor npm install
 ### Running
 
 ```bash
-meteor
+meteor npm run dev
+```
+
+### Call in Browser
+
+```bash
+http://common.maya:3000
+http://example.maya:3000
 ```
 
 > You will see some warnings when running this example, but we are going to [fix](https://github.com/Meteor-Community-Packages/organization/issues/52) them soon
