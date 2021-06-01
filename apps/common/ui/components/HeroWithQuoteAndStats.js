@@ -11,7 +11,7 @@ export default function HeroWithQuoteAndStats(props) {
             aria-hidden="true"
             className="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen"
           >
-            <div className="absolute inset-y-0 right-1/2 w-full bg-yellow-200 rounded-r-3xl lg:right-72" />
+            <div className="absolute inset-y-0 right-1/2 w-full bg-green-500 rounded-r-3xl lg:right-72" />
             <svg
               className="absolute top-8 left-1/2 -ml-3 lg:-right-8 lg:left-auto lg:top-12"
               width={404}
@@ -56,7 +56,7 @@ export default function HeroWithQuoteAndStats(props) {
                 <blockquote className="mt-8">
                   <div className="relative text-lg font-medium text-white md:flex-grow">
                     <svg
-                      className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-blue-400"
+                      className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-green-400"
                       fill="currentColor"
                       viewBox="0 0 32 32"
                       aria-hidden="true"

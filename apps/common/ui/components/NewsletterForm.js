@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export default function NewsletterForm() {
   return (
@@ -11,11 +11,10 @@ export default function NewsletterForm() {
         <div className="py-10 px-6 bg-gradient-to-l from-light-blue-800 to-cyan-700 rounded-3xl sm:py-16 sm:px-12 lg:py-20 lg:px-20 lg:flex lg:items-center">
           <div className="lg:w-0 lg:flex-1">
             <h2 className="text-3xl font-extrabold tracking-tight text-white">
-              Sign up for our newsletter
+              Daftarkanlah email Anda
             </h2>
             <p className="mt-4 max-w-3xl text-lg text-cyan-100">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui Lorem cupidatat
-              commodo. Elit sunt amet fugiat.
+              Anda akan dikirimkan berita terbaru secara berkala
             </p>
           </div>
           <div className="mt-12 sm:w-full sm:max-w-md lg:mt-0 lg:ml-8 lg:flex-1">
@@ -39,12 +38,12 @@ export default function NewsletterForm() {
                 Notify me
               </button>
             </form>
-            <p className="mt-3 text-sm text-cyan-100">
-              We care about the protection of your data. Read our{' '}
-              <Link to="/privacy" className="text-white font-medium underline">
-                Privacy Policy.
-              </Link>
-            </p>
+            {/* <p className="mt-3 text-sm text-cyan-100"> */}
+            {/*  We care about the protection of your data. Read our{' '} */}
+            {/*  <Link to="/privacy" className="text-white font-medium underline"> */}
+            {/*    Privacy Policy. */}
+            {/*  </Link> */}
+            {/* </p> */}
           </div>
         </div>
       </div>

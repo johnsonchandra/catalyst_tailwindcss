@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import NavbarWithImageBackground from '../components/NavbarWithImageBackground';
-import Footer from '../components/Footer';
+import FooterWithSitemap from '../components/FooterWithSitemap';
 
 export default function PageWrapper(props) {
   window.scrollTo({ top: 0 });
@@ -14,7 +14,7 @@ export default function PageWrapper(props) {
   return (
     <NavbarWithImageBackground logoUrl={logoUrl} logoUrlPopUp={logoUrlPopUp} {...props}>
       {children}
-      <Footer
+      <FooterWithSitemap
         logoUrl={logoUrl}
         motto={motto}
         copyright={copyright}

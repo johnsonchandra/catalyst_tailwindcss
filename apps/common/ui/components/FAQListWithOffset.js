@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export default function FAQListWithOffset(props) {
-  const { docs, linkUrl } = props;
+  const { docs } = props;
 
   return (
     <div className="bg-white">
@@ -11,13 +11,13 @@ export default function FAQListWithOffset(props) {
         <div className="lg:grid lg:grid-cols-3 lg:gap-8">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900">Frequently asked questions</h2>
-            <p className="mt-4 text-lg text-gray-500">
-              Can’t find the answer you’re looking for? Reach out to our{' '}
-              <Link to={linkUrl} className="font-medium text-indigo-600 hover:text-indigo-500">
-                customer support
-              </Link>{' '}
-              team.
-            </p>
+            {/* <p className="mt-4 text-lg text-gray-500"> */}
+            {/*  Can’t find the answer you’re looking for? Reach out to our{' '} */}
+            {/*  <Link to={linkUrl} className="font-medium text-indigo-600 hover:text-indigo-500"> */}
+            {/*    customer support */}
+            {/*  </Link>{' '} */}
+            {/*  team. */}
+            {/* </p> */}
           </div>
           <div className="mt-12 lg:mt-0 lg:col-span-2">
             <dl className="space-y-12">
@@ -37,5 +37,4 @@ export default function FAQListWithOffset(props) {
 
 FAQListWithOffset.propTypes = {
   docs: PropTypes.arrayOf(PropTypes.object).isRequired,
-  linkUrl: PropTypes.string.isRequired,
 };
