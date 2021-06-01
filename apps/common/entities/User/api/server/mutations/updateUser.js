@@ -9,6 +9,7 @@ import parseDotToUnderscore from '../../../../../helpers/parseDotToUnderscore';
 import parseMemberFromContext from '../../../../../helpers/parseMemberFromContext';
 import checkOptions from '../../../../../helpers/checkOptions';
 import isAdmin from '../../../../../helpers/isAdmin';
+import upperFirstLetterOfWords from '../../../../../helpers/upperFirstLetterOfWords';
 
 const updateUserSettings = (userToUpdate, party, host) => {
   try {
@@ -53,19 +54,17 @@ const updateUserSettings = (userToUpdate, party, host) => {
 
 const updateUserProfile = ({ _id, profile }, party) => {
   try {
-    const now = new Date();
     return entityUpdate(
       Meteor.users,
       { _id },
       {
-        'profile.fullname': profile.fullname,
+        'profile.fullname': upperFirstLetterOfWords(profile.fullname),
         'profile.shortname': profile.shortname,
         'profile.phone': profile.phone,
         'profile.about': profile.about,
       },
       'update user profile',
       party,
-      now,
     );
   } catch (exception) {
     throw new Error(`[updateUser.updateUserProfile] ${exception.message}`);
@@ -78,7 +77,7 @@ const updateUserEmail = ({ _id, email }, party) => {
     return entityUpdate(
       Meteor.users,
       { _id },
-      { 'emails.0.address': email, 'emails.0.verified': false },
+      { 'emails.0.address': _.toLower(email), 'emails.0.verified': false },
       'update primary email',
       party,
       now,
