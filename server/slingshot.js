@@ -18,7 +18,7 @@ Slingshot.fileRestrictions('saveFileToS3', {
   maxSize: 1 * 1024 * 1024, // 1 MB (use null for unlimited).
 });
 
-// FIXME admin belum bisa upload foto untuk user, baru diri sendiri yang bisa
+// FIXME create separate methode for uploading user photos stuffs
 Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
   AWSAccessKeyId: Meteor.settings.private.s3.accessKey,
   AWSSecretAccessKey: Meteor.settings.private.s3.secretKey,
@@ -70,7 +70,7 @@ Slingshot.createDirective('saveFileToS3', Slingshot.S3Storage, {
       if (metaContext.type.includes('User')) {
         const docUser = {};
         docUser[`profile.${metaContext.type}`] = `${Meteor.settings.public.cloudUrl}/${cloudUrl}`;
-        entityUpdate(Meteor.users, { _id: Meteor.userId() }, docUser, 'update user image', party);
+        entityUpdate(Meteor.users, { _id: entityId }, docUser, `upload ${metaContext.type}`, party);
       }
 
       if (fileCreated && fileCreated._id) {

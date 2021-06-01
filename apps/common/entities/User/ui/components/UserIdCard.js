@@ -1,20 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control, camelcase */
 
-import { Tracker } from 'meteor/tracker';
-import { Slingshot } from 'meteor/edgee:slingshot';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind/src/autoBind';
 
 import { graphql, withApollo } from 'react-apollo';
-
-import _, { flowRight as compose } from 'lodash';
+import { flowRight as compose } from 'lodash';
 
 import Loading from '../../../../ui/components/Loading';
 import BlankState from '../../../../ui/components/BlankState';
 
-import roundPercentage from '../../../../helpers/roundPercentage';
+import uploadToS3 from '../../../../helpers/uploadToS3';
 
 import { detailUser } from '../utils/queries.gql';
 
@@ -30,61 +26,21 @@ class UserIdCard extends React.Component {
   }
 
   handleUploadIDCard(event) {
+    const { data, history, routeAfter } = this.props;
     this.setState({
       idcard: URL.createObjectURL(event.target.files[0]),
     });
-    this.beginFileUpload(event, 'Image_User_IDCard');
+    uploadToS3(
+      event,
+      'User',
+      data.detailUser._id,
+      'Image_User_IDCard',
+      undefined,
+      history,
+      routeAfter,
+      this,
+    );
   }
-
-  beginFileUpload = (event, type) => {
-    const input = event.target;
-    _.each(input.files, (file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        this.preparingUpload(file, type, undefined, undefined);
-      };
-      reader.readAsDataURL(file);
-    });
-  };
-
-  preparingUpload = (file, type, typeId, refs) => {
-    const metaContext = {
-      entity: 'User',
-      entityId: undefined, // special case, auto inject in backend
-      type,
-      refs,
-    };
-
-    let computation;
-    const uploader = new Slingshot.Upload('saveFileToS3', metaContext);
-    if (uploader.validate(file)) alert('Error uploading...');
-
-    uploader.send(file, (error, response) => {
-      computation.stop();
-      if (error) {
-        alert(`Error uploading...${error}`);
-        this.setState({ [`progress_${type}`]: 'Error' });
-      } else {
-        this.setState({ [`progress_${type}`]: '' });
-
-        const { history, routeAfter } = this.props;
-        if (routeAfter)
-          history.push(
-            routeAfter === 'filedetail'
-              ? `/File/${response.substring(response.lastIndexOf('/') + 1)}`
-              : routeAfter,
-          );
-      }
-    });
-
-    computation = Tracker.autorun(() => {
-      if (!isNaN(uploader.progress())) {
-        this.setState({
-          [`progress_${type}`]: `${roundPercentage(uploader.progress() * 100, 0)} %`,
-        });
-      }
-    });
-  };
 
   render() {
     const { data } = this.props;
