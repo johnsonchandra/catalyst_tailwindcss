@@ -47,9 +47,7 @@ const getUserJSONdefs = (publishName, props) => {
     listUserApprovedHost: {
       auth: ['admin'],
       query: {
-        _id: { $ne: props && props._id },
-        'emails.verified': { $eq: true },
-        'profile.Image_User_IDCard': { $exists: true }, // hosts fields are injected in logic
+        _id: { $ne: props && props._id }, // hosts fields are injected in logic
       },
       fields: { profile: 1, emails: 1, status: 1 },
       queryOr: queryOr(props),

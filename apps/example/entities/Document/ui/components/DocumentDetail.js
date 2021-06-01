@@ -40,11 +40,7 @@ class DocumentDetail extends React.Component {
 
   handleRemove = () => {
     const { removeDocument, data } = this.props;
-    if (
-      confirm(
-        `Document [ ${data.detailDocument.name} ] will permanently DELETED!!! ARE YOU SURE???`,
-      )
-    ) {
+    if (confirm(`Document will permanently DELETED!!! ARE YOU SURE???`)) {
       removeDocument({
         variables: {
           _id: data.detailDocument._id,
@@ -62,7 +58,7 @@ class DocumentDetail extends React.Component {
       Closed: setStatusToClosed,
     };
 
-    if (confirm(`Document [ ${data.detailDocument.name} ] will be set to ${status}?`)) {
+    if (confirm(`Document will be set to ${status}?`)) {
       actions[status]({
         variables: {
           _id: data.detailDocument._id,
@@ -114,6 +110,7 @@ class DocumentDetail extends React.Component {
                     autoComplete="name"
                     defaultValue={data.detailDocument.name}
                     disabled={disabled}
+                    required
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -176,6 +173,7 @@ class DocumentDetail extends React.Component {
                     type="number"
                     defaultValue={data.detailDocument.amount}
                     disabled={disabled}
+                    required
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>

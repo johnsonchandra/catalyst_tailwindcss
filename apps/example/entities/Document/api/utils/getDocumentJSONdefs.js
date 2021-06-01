@@ -48,7 +48,7 @@ const getDocumentJSONdefs = (publishName, props) => {
       auth: ['user', 'member', 'spv'],
     },
     removeDocument: {
-      auth: ['spv'],
+      auth: ['member', 'spv'],
     },
     setDocumentStatusToDraft: {
       auth: ['spv'],
