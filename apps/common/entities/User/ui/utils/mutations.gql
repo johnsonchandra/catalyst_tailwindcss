@@ -23,8 +23,8 @@ mutation sendVerificationEmail {
   }
 }
 
-mutation forgotPassword($user: UserInput) {
-  forgotPassword(user: $user) {
+mutation forgotPassword($email: String!) {
+  forgotPassword(email: $email) {
     _id
   }
 }

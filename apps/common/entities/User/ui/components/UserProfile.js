@@ -79,6 +79,9 @@ class UserProfile extends React.Component {
             fullname: form.fullname.value,
             shortname: form.shortname.value,
             phone: form.phone.value,
+            gender: form.gender.value,
+            province: form.province.value,
+            country: form.country.value,
             about: form.about.value,
           },
         },
@@ -103,7 +106,9 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    const { data, match } = this.props;
+    const { states, genders, countries, data, match } = this.props;
+    const stateOrProvinces = states;
+
     const { pp, cover, progress_Image_User_PP, progress_Image_User_Cover } = this.state;
 
     if (data.loading) return <Loading />;
@@ -351,6 +356,69 @@ class UserProfile extends React.Component {
 
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
+                    htmlFor="gender"
+                    className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Gender
+                  </label>
+                  <div className="mt-1 sm:mt-0 sm:col-span-2">
+                    <select
+                      id="gender"
+                      name="gender"
+                      className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                      defaultValue={data.detailUser.gender}
+                    >
+                      {genders.map((tipe) => (
+                        <option key={tipe}>{tipe}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                  <label
+                    htmlFor="province"
+                    className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    State/Province
+                  </label>
+                  <div className="mt-1 sm:mt-0 sm:col-span-2">
+                    <select
+                      id="province"
+                      name="province"
+                      className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                      defaultValue={data.detailUser.province}
+                    >
+                      {stateOrProvinces.map((tipe) => (
+                        <option key={tipe}>{tipe}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                  <label
+                    htmlFor="country"
+                    className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Country
+                  </label>
+                  <div className="mt-1 sm:mt-0 sm:col-span-2">
+                    <select
+                      id="country"
+                      name="country"
+                      className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                      defaultValue={data.detailUser.country}
+                    >
+                      {countries.map((tipe) => (
+                        <option key={tipe}>{tipe}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                  <label
                     htmlFor="about"
                     className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                   >
@@ -428,10 +496,16 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.defaultProps = {
+  states: ['DKI Jakarta'],
+  countries: ['Indonesia'],
+  genders: ['Perempuan', 'Laki-Laki'],
   routeAfter: undefined,
 };
 
 UserProfile.propTypes = {
+  states: PropTypes.arrayOf(PropTypes.string),
+  countries: PropTypes.arrayOf(PropTypes.string),
+  genders: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.object.isRequired,
   updateUser: PropTypes.func.isRequired,
   routeAfter: PropTypes.string,

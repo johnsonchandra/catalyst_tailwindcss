@@ -5,7 +5,7 @@ import { Menu, Transition } from '@headlessui/react';
 
 import { Link } from 'react-router-dom';
 
-import { BellIcon, MenuAlt2Icon } from '@heroicons/react/outline';
+import { MenuAlt2Icon } from '@heroicons/react/outline';
 import { SearchIcon } from '@heroicons/react/solid';
 
 import PropTypes from 'prop-types';
@@ -56,10 +56,10 @@ export default function NavbarTop(props) {
             )}
           </div>
           <div className="ml-4 flex items-center md:ml-6">
-            <button className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              <span className="sr-only">View notifications</span>
-              <BellIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
+            {/* <button className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> */}
+            {/*  <span className="sr-only">View notifications</span> */}
+            {/*  <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
+            {/* </button> */}
 
             {/* Profile dropdown */}
             <Menu as="div" className="ml-3 relative">

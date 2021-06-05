@@ -21,6 +21,9 @@ import Public from './components/RoutePublic';
 import UserLoginPage from './pages/User/Access/UserLoginPage';
 import UserLogoutPage from './pages/User/Access/UserLogoutPage';
 import UserSignupPage from './pages/User/Access/UserSignupPage';
+import UserVerifyEmailPage from './pages/User/Access/UserVerifyEmailPage';
+import UserForgetPasswordPage from './pages/User/Access/UserForgetPasswordPage';
+import UserResetPasswordPage from './pages/User/Access/UserResetPasswordPage';
 
 // app pages
 import Home from './pages/Home';
@@ -503,7 +506,15 @@ class CommonApp extends React.Component {
             {...props}
             {...state}
           />
-
+          <Route path="/verify-email/:token" component={UserVerifyEmailPage} />
+          <Public path="/forgetpassword" component={UserForgetPasswordPage} {...props} {...state} />
+          <Public
+            name="reset-password"
+            path="/reset-password/:token"
+            component={UserResetPasswordPage}
+            {...props}
+            {...state}
+          />
           <Route name="NotAuthorized" path="/NotAuthorized" component={NotAuthorized} />
           <Route component={NotFound} />
         </Switch>

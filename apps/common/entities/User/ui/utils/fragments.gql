@@ -4,6 +4,9 @@ fragment UserAttributes on User {
   shortname
   emailAddress
   phone
+  gender
+  province
+  country
 
   Image_User_PP
   Image_User_Cover

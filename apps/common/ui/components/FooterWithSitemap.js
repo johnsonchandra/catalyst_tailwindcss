@@ -16,19 +16,20 @@ export default function FooterWithSitemap(props) {
         </div>
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <img className="h-10" src={logoUrl} alt="Logo" />
+            <img src={logoUrl} alt="Logo" />
             <p className="text-warm-gray-500 text-base">{motto}</p>
             <div className="flex space-x-6">
-              {navigationsFooter.social.map((item) => (
-                <Link
-                  key={item._id}
-                  to={item.linkUrl}
-                  className="text-warm-gray-400 hover:text-warm-gray-500"
-                >
-                  <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-6 w-6" aria-hidden="true" />
-                </Link>
-              ))}
+              {navigationsFooter.social &&
+                navigationsFooter.social.map((item) => (
+                  <Link
+                    key={item._id}
+                    to={item.linkUrl}
+                    className="text-warm-gray-400 hover:text-warm-gray-500"
+                  >
+                    <span className="sr-only">{item.name}</span>
+                    <item.icon className="h-6 w-6" aria-hidden="true" />
+                  </Link>
+                ))}
             </div>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
@@ -38,16 +39,17 @@ export default function FooterWithSitemap(props) {
                   Solutions
                 </h3>
                 <ul className="mt-4 space-y-4">
-                  {navigationsFooter.solutions.map((item) => (
-                    <li key={item._id}>
-                      <Link
-                        to={item.linkUrl}
-                        className="text-base text-warm-gray-500 hover:text-warm-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
+                  {navigationsFooter.solutions &&
+                    navigationsFooter.solutions.map((item) => (
+                      <li key={item._id}>
+                        <Link
+                          to={item.linkUrl}
+                          className="text-base text-warm-gray-500 hover:text-warm-gray-900"
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
@@ -55,16 +57,17 @@ export default function FooterWithSitemap(props) {
                   Support
                 </h3>
                 <ul className="mt-4 space-y-4">
-                  {navigationsFooter.support.map((item) => (
-                    <li key={item._id}>
-                      <Link
-                        to={item.linkUrl}
-                        className="text-base text-warm-gray-500 hover:text-warm-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
+                  {navigationsFooter.support &&
+                    navigationsFooter.support.map((item) => (
+                      <li key={item._id}>
+                        <Link
+                          to={item.linkUrl}
+                          className="text-base text-warm-gray-500 hover:text-warm-gray-900"
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
@@ -74,16 +77,17 @@ export default function FooterWithSitemap(props) {
                   Company
                 </h3>
                 <ul className="mt-4 space-y-4">
-                  {navigationsFooter.company.map((item) => (
-                    <li key={item._id}>
-                      <Link
-                        to={item.linkUrl}
-                        className="text-base text-warm-gray-500 hover:text-warm-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
+                  {navigationsFooter.company &&
+                    navigationsFooter.company.map((item) => (
+                      <li key={item._id}>
+                        <Link
+                          to={item.linkUrl}
+                          className="text-base text-warm-gray-500 hover:text-warm-gray-900"
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
@@ -91,16 +95,17 @@ export default function FooterWithSitemap(props) {
                   Legal
                 </h3>
                 <ul className="mt-4 space-y-4">
-                  {navigationsFooter.legal.map((item) => (
-                    <li key={item._id}>
-                      <Link
-                        to={item.linkUrl}
-                        className="text-base text-warm-gray-500 hover:text-warm-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
+                  {navigationsFooter.legal &&
+                    navigationsFooter.legal.map((item) => (
+                      <li key={item._id}>
+                        <Link
+                          to={item.linkUrl}
+                          className="text-base text-warm-gray-500 hover:text-warm-gray-900"
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>

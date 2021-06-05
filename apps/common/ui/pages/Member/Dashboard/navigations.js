@@ -1,12 +1,12 @@
-import { DocumentIcon } from '@heroicons/react/outline';
+import { UsersIcon } from '@heroicons/react/outline';
 
 const navigations = [
   {
     _id: 21,
     sequenceNr: 21,
-    name: 'Document',
-    linkUrl: '/Document/List/Current',
-    icon: DocumentIcon,
+    name: 'Organization',
+    linkUrl: '/Spv/Org/List/Current/Host',
+    icon: UsersIcon,
   },
 ];
 

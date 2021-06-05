@@ -3,28 +3,25 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
+import Loading from '../../../../ui/components/Loading';
 
 class UserLogout extends React.Component {
   componentDidMount() {
-    const { setAfterLoginPath } = this.props;
-    Meteor.logout(() => setAfterLoginPath(null));
+    const { setAfterLoginPath, history } = this.props;
+    Meteor.logout(() => {
+      setAfterLoginPath(null);
+      history.push('/');
+    });
   }
 
   render() {
-    return (
-      <>
-        <h1>You are now logged OUT</h1>
-        <p>
-          <Link to="/">Home</Link>
-        </p>
-      </>
-    );
+    return <Loading />;
   }
 }
 
 UserLogout.propTypes = {
   setAfterLoginPath: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default UserLogout;

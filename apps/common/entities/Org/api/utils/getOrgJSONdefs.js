@@ -14,7 +14,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgDraftHost: {
-      auth: ['spv', 'admin'],
+      auth: ['member', 'spv', 'admin'],
       query: { status: { $in: ['Draft', 'Queue'] } },
       fields: {
         nr: 1,
@@ -36,7 +36,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgCurrentHost: {
-      auth: ['spv', 'admin'],
+      auth: ['member', 'spv', 'admin'],
       query: { status: 'Active' },
       fields: {
         nr: 1,
@@ -58,7 +58,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgCurrentFeatureHost: {
-      auth: ['spv', 'admin'],
+      auth: ['member', 'spv', 'admin'],
       query: { featureNr: { $gt: 0 }, status: 'Active' },
       fields: {
         nr: 1,
@@ -119,7 +119,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     detailOrg: {
-      auth: ['spv', 'admin'],
+      auth: ['member', 'spv', 'admin'],
       query: { _id: props && props._id },
       fields: {
         nr: 1,
@@ -142,10 +142,10 @@ const getOrgJSONdefs = (publishName, props) => {
       },
     },
     addOrg: {
-      auth: ['spv', 'admin'],
+      auth: ['member', 'spv', 'admin'],
     },
     updateOrg: {
-      auth: ['spv', 'admin'],
+      auth: ['member', 'spv', 'admin'],
     },
     removeOrg: {
       auth: ['spv', 'admin'],

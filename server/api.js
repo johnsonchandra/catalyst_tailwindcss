@@ -50,6 +50,14 @@ import '../apps/common/entities/Notification/api/server/publications';
 import NotificationTypes from '../apps/common/entities/Notification/api/server/types';
 import NotificationQueries from '../apps/common/entities/Notification/api/server/queries';
 import NotificationMutations from '../apps/common/entities/Notification/api/server/mutations';
+
+import '../apps/common/entities/EmailSubscriber/api/server';
+// import '../apps/common/entities/EmailSubscriber/api/server/methods';
+import '../apps/common/entities/EmailSubscriber/api/server/publications';
+import EmailSubscriberTypes from '../apps/common/entities/EmailSubscriber/api/server/types';
+import EmailSubscriberQueries from '../apps/common/entities/EmailSubscriber/api/server/queries';
+import EmailSubscriberMutations from '../apps/common/entities/EmailSubscriber/api/server/mutations';
+
 // end COMMON
 
 // start EXAMPLE
@@ -89,6 +97,7 @@ const schema = {
     ${FileTypes}
     ${OrgTypes}
     ${NotificationTypes}
+    ${EmailSubscriberTypes}
     # end COMMON
 
     # start EXAMPLE
@@ -130,6 +139,10 @@ const schema = {
       detailNotification(_id: String): Notification
       getNotification(_id: String): Notification
 
+      ## EmailSubscriber
+      detailEmailSubscriber(_id: String): EmailSubscriber
+      getEmailSubscriber(_id: String): EmailSubscriber
+
       # end COMMON
 
       # start EXAMPLE
@@ -148,7 +161,7 @@ const schema = {
       updateUserRoles(party: UserInput): User
       setUserSettingsByHostToTrue: User
       sendVerificationEmail: User
-      forgotPassword(user: UserInput): User
+      forgotPassword(email: String!): User
       sendWelcomeEmail: User
 
       ## UserSetting
@@ -193,6 +206,14 @@ const schema = {
       setNotificationStatusToActive(_id: String!, description: String): Notification
       setNotificationStatusToClosed(_id: String!, description: String): Notification
 
+      ## EmailSubscriber
+      addEmailSubscriber(email: String!): EmailSubscriber
+      updateEmailSubscriber(inputEmailSubscriber: EmailSubscriberInput): EmailSubscriber
+      removeEmailSubscriber(_id: String!): EmailSubscriber
+      setEmailSubscriberStatusToDraft(_id: String!, description: String): EmailSubscriber
+      setEmailSubscriberStatusToActive(_id: String!, description: String): EmailSubscriber
+      setEmailSubscriberStatusToClosed(_id: String!, description: String): EmailSubscriber
+
       # end COMMON
 
       # start EXAMPLE
@@ -217,6 +238,7 @@ const schema = {
       ...OrgQueries,
       ...FileQueries,
       ...NotificationQueries,
+      ...EmailSubscriberQueries,
       // end COMMON
 
       // start EXAMPLE
@@ -232,6 +254,7 @@ const schema = {
       ...OrgMutations,
       ...FileMutations,
       ...NotificationMutations,
+      ...EmailSubscriberMutations,
       // end COMMON
 
       // start EXAMPLE

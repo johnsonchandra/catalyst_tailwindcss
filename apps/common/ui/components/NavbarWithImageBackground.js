@@ -32,7 +32,7 @@ export default function NavbarWithImageBackground(props) {
                 <div className="flex items-center justify-between w-full lg:w-auto">
                   <Link to="/">
                     <span className="sr-only">{logoName}</span>
-                    <img className="h-8 w-auto sm:h-10" src={logoUrl} alt="" />
+                    <img className="h-16 w-auto sm:h-20" src={logoUrl} alt="" />
                   </Link>
                   <div className="-mr-2 flex items-center lg:hidden">
                     <Popover.Button className="bg-light-blue-800 bg-opacity-0 rounded-md p-2 inline-flex items-center justify-center text-cyan-100 hover:bg-opacity-100 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white">
@@ -45,7 +45,7 @@ export default function NavbarWithImageBackground(props) {
                   {navigations.map((item) => (
                     <Link
                       key={item._id}
-                      to={item.href}
+                      to={item.linkUrl}
                       className="text-base font-medium text-white hover:text-cyan-100"
                     >
                       {item.name}
@@ -103,7 +103,7 @@ export default function NavbarWithImageBackground(props) {
                         {navigations.map((item) => (
                           <Link
                             key={item._id}
-                            to={item.href}
+                            to={item.linkUrl}
                             className="block px-3 py-2 rounded-md text-base font-medium text-warm-gray-900 hover:bg-warm-gray-50"
                           >
                             {item.name}

@@ -48,9 +48,7 @@ class OrgProfile extends React.Component {
   handleRemove = () => {
     // eslint-disable-next-line react/destructuring-assignment
     const { data, removeDoc } = this.props;
-    if (
-      confirm(`Organization ${data.detailOrg.name} will permanently DELETED!!! ARE YOU SURE???`)
-    ) {
+    if (confirm(`Organization will permanently DELETED!!! ARE YOU SURE???`)) {
       removeDoc({
         variables: {
           _id: data.detailOrg._id,
@@ -68,7 +66,7 @@ class OrgProfile extends React.Component {
       Closed: setStatusToClosed,
     };
 
-    if (confirm(`Organization [ ${data.detailOrg.name} ] will be set to ${status}?`)) {
+    if (confirm(`Organization will be set to ${status}?`)) {
       actions[status]({
         variables: {
           _id: data.detailOrg._id,
@@ -78,7 +76,7 @@ class OrgProfile extends React.Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { countries, provinces, types, data } = this.props;
     if (data.loading) return <Loading />;
     if (!data.detailOrg)
       return <BlankState title="No Profile found" subtitle="Make sure you have enough right" />;
@@ -326,14 +324,16 @@ class OrgProfile extends React.Component {
                   State/Province
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
-                  <input
+                  <select
                     id="state"
                     name="state"
-                    type="text"
-                    autoComplete="state"
-                    defaultValue={data.detailOrg.state}
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                  />
+                    defaultValue={data.detailOrg.state}
+                  >
+                    {provinces.map((tipe) => (
+                      <option key={tipe}>{tipe}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
@@ -345,14 +345,16 @@ class OrgProfile extends React.Component {
                   Country
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
-                  <input
+                  <select
                     id="country"
                     name="country"
-                    type="text"
-                    autoComplete="country"
-                    defaultValue={data.detailOrg.country}
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                  />
+                    defaultValue={data.detailOrg.country}
+                  >
+                    {countries.map((tipe) => (
+                      <option key={tipe}>{tipe}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
@@ -368,9 +370,9 @@ class OrgProfile extends React.Component {
                     id="type"
                     name="type"
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                    defaultValue={data.detailOrg.type || 'Pokja'}
+                    defaultValue={data.detailOrg.type}
                   >
-                    {['Company', 'Department', 'Division', 'Organization'].map((tipe) => (
+                    {types.map((tipe) => (
                       <option key={tipe}>{tipe}</option>
                     ))}
                   </select>
@@ -454,7 +456,15 @@ class OrgProfile extends React.Component {
   }
 }
 
+OrgProfile.defaultProps = {
+  types: ['Company', 'Department', 'Division', 'Organization'],
+  provinces: ['DKI Jakarta'],
+  countries: ['Indonesia'],
+};
 OrgProfile.propTypes = {
+  types: PropTypes.arrayOf(PropTypes.string),
+  provinces: PropTypes.arrayOf(PropTypes.string),
+  countries: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.object.isRequired,
   updateDoc: PropTypes.func.isRequired,
   removeDoc: PropTypes.func.isRequired,

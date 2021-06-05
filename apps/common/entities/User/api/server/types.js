@@ -13,6 +13,9 @@ export default `
     fullname: String
     shortname: String
     phone: String
+    gender: String
+    province: String
+    country: String
     about: String
   }
   
@@ -30,6 +33,9 @@ export default `
     fullname: String
     emailAddress: String
     phone: String
+    gender: String
+    province: String
+    country: String
     roles: [Role]
     settings: [UserSetting]
     Image_User_PP: String

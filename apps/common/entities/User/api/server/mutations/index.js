@@ -46,20 +46,32 @@ export default {
     const host = parseHost(context.headers.origin);
     const tenant = Tenant.findOne({ host });
 
-    emailTemplates.siteName = tenant.name;
+    emailTemplates.siteName = tenant.settings.name;
     emailTemplates.from = tenant.email;
 
     emailTemplates.verifyEmail = {
       subject() {
-        return `[${tenant.name}] Verify Your Email Address`;
+        return `[ ${tenant.settings.name} ] Verifikasi Email Anda`;
       },
       html(user, url) {
         const urlHost = parseHost(url);
         const urlWithoutHash = url.replace(urlHost, host).replace('#/', '');
+        const urlWithoutHashWithoutLocation = urlWithoutHash.substring(
+          0,
+          urlWithoutHash.indexOf('/verify-email'),
+        );
+
+        if (Meteor.isDevelopment) {
+          console.info(`Verify Email Link in html: ${urlWithoutHash}`);
+          console.info(
+            `logoUrl in html: ${urlWithoutHashWithoutLocation}${tenant.settings.iconUrl}`,
+          );
+        }
+
         return handlebarsEmailToHtml(getPrivateFile('email-templates/verify-email.html'), {
-          title: "Let's Verify Your Email",
-          subtitle: `Verify your email to start using ${tenant.name}`,
-          logoUrl: tenant.logoUrl,
+          title: 'Verifikasi Email Anda',
+          subtitle: `Sebagai langkah pertama verifikasi menjadi anggota ${tenant.settings.name}`,
+          logoUrl: `${urlWithoutHashWithoutLocation}${tenant.settings.iconUrl}`,
           productName: host,
           fullname: user.profile.fullname,
           verifyUrl: urlWithoutHash,
@@ -69,7 +81,7 @@ export default {
         const urlHost = parseHost(url);
         const urlWithoutHash = url.replace(urlHost, host).replace('#/', '');
 
-        if (Meteor.isDevelopment) console.info(`[ Common ] Verify Email Link: ${urlWithoutHash}`);
+        if (Meteor.isDevelopment) console.info(`Verify Email Link in text: ${urlWithoutHash}`);
 
         return handlebarsEmailToText(getPrivateFile('email-templates/verify-email.txt'), {
           productName: host,
@@ -87,26 +99,40 @@ export default {
   },
 
   forgotPassword: (parent, args, context) => {
+    const userReset = Meteor.users.findOne({ 'emails.address': args.email });
+    if (!userReset) throw new Error('Email not valid');
+
     const { emailTemplates } = Accounts;
 
     const host = parseHost(context.headers.origin);
     const tenant = Tenant.findOne({ host });
 
-    emailTemplates.siteName = tenant.name;
+    emailTemplates.siteName = tenant.settings.name;
     emailTemplates.from = tenant.email;
 
     emailTemplates.resetPassword = {
       subject() {
-        return `[${tenant.name}] Reset Your Password`;
+        return `[${tenant.settings.name}] Reset Your Password`;
       },
       html(user, url) {
         const urlHost = parseHost(url);
         const urlWithoutHash = url.replace(urlHost, host).replace('#/', '');
+        const urlWithoutHashWithoutLocation = urlWithoutHash.substring(
+          0,
+          urlWithoutHash.indexOf('/reset-password'),
+        );
+
+        if (Meteor.isDevelopment) {
+          console.info(`Reset Password Link in html: ${urlWithoutHash}`);
+          console.info(
+            `logoUrl in html: ${urlWithoutHashWithoutLocation}${tenant.settings.iconUrl}`,
+          );
+        } // eslint-disable-line
 
         return handlebarsEmailToHtml(getPrivateFile('email-templates/reset-password.html'), {
-          title: "Let's Reset Your Password",
-          subtitle: 'A password reset was requested for this email address.',
-          logoUrl: tenant.logoUrl,
+          title: 'Reset Password',
+          subtitle: 'Ada permintaan masuk untuk reset password dengan alamat email ini',
+          logoUrl: `${urlWithoutHashWithoutLocation}${tenant.settings.iconUrl}`,
           fullname: user.profile.fullname,
           productName: host,
           emailAddress: user.emails[0].address,
@@ -117,7 +143,7 @@ export default {
         const urlHost = parseHost(url);
         const urlWithoutHash = url.replace(urlHost, host).replace('#/', '');
 
-        if (Meteor.isDevelopment) console.info(`Reset Password Link: ${urlWithoutHash}`); // eslint-disable-line
+        if (Meteor.isDevelopment) console.info(`Reset Password Link in text: ${urlWithoutHash}`); // eslint-disable-line
 
         return handlebarsEmailToText(getPrivateFile('email-templates/reset-password.txt'), {
           fullname: user.profile.fullname,
@@ -128,12 +154,10 @@ export default {
       },
     };
 
-    const user = Meteor.users.findOne({ 'emails.address': args.user.email });
-
-    Accounts.sendResetPasswordEmail(user._id);
+    Accounts.sendResetPasswordEmail(userReset._id);
 
     return {
-      _id: user._id,
+      _id: userReset._id,
     };
   },
 

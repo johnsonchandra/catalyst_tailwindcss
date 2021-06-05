@@ -11,7 +11,7 @@ export default function DashboardMember(props) {
   const { roles } = props;
   return (
     <SidebarWithSearchAndAvatar currentPageName="Dashboard" navigations={getNavs(roles)} {...props}>
-      <p>ini Dashboard Member</p>
+      <p>Selamat datang! Anda melihat Dashboard dengan akses Anggota.</p>
     </SidebarWithSearchAndAvatar>
   );
 }

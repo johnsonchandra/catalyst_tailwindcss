@@ -135,8 +135,8 @@ class UserLogin extends React.Component {
   }
 }
 
-export default UserLogin;
-
 UserLogin.propTypes = {
   settings: PropTypes.object.isRequired,
 };
+
+export default UserLogin;

@@ -6,15 +6,15 @@ import Tenant from '../../../Tenant/api';
 const getEmailOptions = (user, tenant) => {
   try {
     const { fullname } = user.profile;
-    const productName = tenant.name;
+    const productName = tenant.settings.name;
 
     return {
       to: user.emails[0].address,
       from: tenant.email,
-      subject: `[${productName}] Welcome, ${fullname}!`,
+      subject: `[${productName}] Terima kasih, ${fullname}!`,
       template: 'welcome',
       templateVars: {
-        title: `Welcome, ${fullname}!`,
+        title: `Terima kasih, ${fullname}!`,
         logoUrl: tenant.logoUrl,
         productName,
         fullname,

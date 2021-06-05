@@ -27,24 +27,24 @@ export default function BlogList3Column(props) {
                 <p className="text-xl font-semibold text-gray-900">{doc.title}</p>
                 <p className="mt-3 text-base text-gray-500">{doc.description}</p>
               </a>
-              <div className="mt-6 flex items-center">
-                <div className="flex-shrink-0">
-                  <a href={doc.author.href}>
-                    <span className="sr-only">{doc.author.name}</span>
-                    <img className="h-10 w-10 rounded-full" src={doc.author.imageUrl} alt="" />
-                  </a>
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-900">
-                    <a href={doc.author.href}>{doc.author.name}</a>
-                  </p>
-                  <div className="flex space-x-1 text-sm text-gray-500">
-                    <time dateTime={doc.datetime}>{doc.date}</time>
-                    <span aria-hidden="true">&middot;</span>
-                    <span>{doc.readingTime} read</span>
-                  </div>
-                </div>
-              </div>
+              {/* <div className="mt-6 flex items-center"> */}
+              {/*  <div className="flex-shrink-0"> */}
+              {/*    <a href={doc.author.href}> */}
+              {/*      <span className="sr-only">{doc.author.name}</span> */}
+              {/*      <img className="h-10 w-10 rounded-full" src={doc.author.imageUrl} alt="" /> */}
+              {/*    </a> */}
+              {/*  </div> */}
+              {/*  <div className="ml-3"> */}
+              {/*    <p className="text-sm font-medium text-gray-900"> */}
+              {/*      <a href={doc.author.href}>{doc.author.name}</a> */}
+              {/*    </p> */}
+              {/*    <div className="flex space-x-1 text-sm text-gray-500"> */}
+              {/*      <time dateTime={doc.datetime}>{doc.date}</time> */}
+              {/*      <span aria-hidden="true">&middot;</span> */}
+              {/*      <span>{doc.readingTime} read</span> */}
+              {/*    </div> */}
+              {/*  </div> */}
+              {/* </div> */}
             </div>
           ))}
         </div>

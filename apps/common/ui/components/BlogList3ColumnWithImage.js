@@ -36,26 +36,26 @@ export default function doc3ColumnWithImage(props) {
                     <p className="mt-3 text-base text-gray-500">{doc.description}</p>
                   </Link>
                 </div>
-                <div className="mt-6 flex items-center">
-                  <div className="flex-shrink-0">
-                    <Link to={doc.author.linkUrl}>
-                      <span className="sr-only">{doc.author.name}</span>
-                      <img className="h-10 w-10 rounded-full" src={doc.author.imgUrl} alt="" />
-                    </Link>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">
-                      <Link to={doc.author.linkUrl} className="hover:underline">
-                        {doc.author.name}
-                      </Link>
-                    </p>
-                    <div className="flex space-x-1 text-sm text-gray-500">
-                      <time dateTime={doc.datetime}>{doc.date}</time>
-                      <span aria-hidden="true">&middot;</span>
-                      <span>{doc.readingTime} read</span>
-                    </div>
-                  </div>
-                </div>
+                {/* <div className="mt-6 flex items-center"> */}
+                {/*  <div className="flex-shrink-0"> */}
+                {/*    <Link to={doc.author.linkUrl}> */}
+                {/*      <span className="sr-only">{doc.author.name}</span> */}
+                {/*      <img className="h-10 w-10 rounded-full" src={doc.author.imgUrl} alt="" /> */}
+                {/*    </Link> */}
+                {/*  </div> */}
+                {/*  <div className="ml-3"> */}
+                {/*    <p className="text-sm font-medium text-gray-900"> */}
+                {/*      <Link to={doc.author.linkUrl} className="hover:underline"> */}
+                {/*        {doc.author.name} */}
+                {/*      </Link> */}
+                {/*    </p> */}
+                {/*    <div className="flex space-x-1 text-sm text-gray-500"> */}
+                {/*      <time dateTime={doc.datetime}>{doc.date}</time> */}
+                {/*      <span aria-hidden="true">&middot;</span> */}
+                {/*      <span>{doc.readingTime} read</span> */}
+                {/*    </div> */}
+                {/*  </div> */}
+                {/* </div> */}
               </div>
             </div>
           ))}
