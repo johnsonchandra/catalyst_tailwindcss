@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import getUserJSONdefs from '../../utils/getUserJSONdefs';
 import getQueryAndProjectionForRootAdmin from '../../../../../helpers/getQueryAndProjectionForRootAdmin';
@@ -15,7 +15,7 @@ Meteor.publish(publishName, function pub(props) {
       getUserJSONdefs,
     );
 
-    Counts.publish(this, `${publishName}Count`, Meteor.users.find(query));
+    Counts.publish(this, `${publishName}Count`, Meteor.users.find(query), { fastCount: true });
 
     return Meteor.users.find(query, projection);
   } catch (exception) {

@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import parsePropsToQueryOptions from '../../../../helpers/parsePropsToQueryOptions';
 import parseHost from '../../../../helpers/parseHost';
@@ -26,7 +26,7 @@ const pubProcessorUser = (Entity, publishName, getJSONdefs, props, parent, appro
 
   if (options.search) query.$or = getJSONdefs(publishName, options).queryOr;
 
-  Counts.publish(parent, `${publishName}Count`, Entity.find(query));
+  Counts.publish(parent, `${publishName}Count`, Entity.find(query), { fastCount: true });
 
   return Entity.find(query, getProjection(options));
 };

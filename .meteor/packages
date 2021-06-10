@@ -30,7 +30,6 @@ littledata:synced-cron
 meteorhacks:picker
 
 reywood:publish-composite
-tmeasday:publish-counts
 
 apollo
 swydo:graphql
@@ -38,3 +37,4 @@ swydo:graphql
 edgee:slingshot
 server-render
 react-meteor-data
+ros:publish-counts

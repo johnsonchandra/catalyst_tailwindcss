@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import getDocumentQueryAndProjection from '../processors/getDocumentQueryAndProjection';
 
@@ -14,7 +14,7 @@ Meteor.publish(publishName, function pub(props) {
     // this is just for document. if you dont need it, just look at listDocumentDraft
     const { query, projection } = getDocumentQueryAndProjection(publishName, props, this);
 
-    Counts.publish(this, `${publishName}Count`, Document.find(query));
+    Counts.publish(this, `${publishName}Count`, Document.find(query), { fastCount: true });
 
     return Document.find(query, projection);
   } catch (exception) {

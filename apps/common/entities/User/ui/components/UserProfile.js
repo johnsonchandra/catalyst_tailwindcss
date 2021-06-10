@@ -17,6 +17,9 @@ import Anon from '../../../../ui/components/Anon';
 
 import uploadToS3 from '../../../../helpers/uploadToS3';
 
+// FIXME bikin jadi props aja
+// import provinces from '../../../../../hijau/helpers/provinces';
+
 import { detailUser } from '../utils/queries.gql';
 
 import { updateUser as updateUserMutation } from '../utils/mutations.gql';
@@ -107,6 +110,7 @@ class UserProfile extends React.Component {
 
   render() {
     const { states, genders, countries, data, match } = this.props;
+    // const stateOrProvinces = states || provinces;
     const stateOrProvinces = states;
 
     const { pp, cover, progress_Image_User_PP, progress_Image_User_Cover } = this.state;
@@ -193,12 +197,14 @@ class UserProfile extends React.Component {
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
                     <div className="flex items-center">
-                      <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                      <span className="h-24 w-24 rounded-full overflow-hidden bg-gray-100">
                         {/* eslint-disable-next-line no-nested-ternary */}
                         {pp ? (
                           <img src={pp} alt="pp" />
                         ) : data.detailUser.Image_User_PP ? (
-                          <img src={data.detailUser.Image_User_PP} alt="pp" />
+                          <a href={data.detailUser.Image_User_PP} target="_blank" rel="noreferrer">
+                            <img src={data.detailUser.Image_User_PP} alt="pp" />
+                          </a>
                         ) : (
                           <Anon />
                         )}
@@ -236,7 +242,13 @@ class UserProfile extends React.Component {
                         {cover ? (
                           <img src={cover} alt="cover" />
                         ) : data.detailUser.Image_User_Cover ? (
-                          <img src={data.detailUser.Image_User_Cover} alt="cover" />
+                          <a
+                            href={data.detailUser.Image_User_Cover}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <img src={data.detailUser.Image_User_Cover} alt="cover" />
+                          </a>
                         ) : (
                           <svg
                             className="mx-auto h-12 w-12 text-gray-400"
@@ -498,7 +510,7 @@ class UserProfile extends React.Component {
 UserProfile.defaultProps = {
   states: ['DKI Jakarta'],
   countries: ['Indonesia'],
-  genders: ['Perempuan', 'Laki-Laki'],
+  genders: ['Perempuan', 'Laki-Laki', 'Non-Biner', 'Transgender'],
   routeAfter: undefined,
 };
 

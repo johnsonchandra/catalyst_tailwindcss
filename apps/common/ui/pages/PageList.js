@@ -30,6 +30,7 @@ class PageList extends React.Component {
       jsonDefs,
       tabs,
       sort,
+      perPage,
       settings,
       history,
       roles,
@@ -39,7 +40,7 @@ class PageList extends React.Component {
       createDoc,
     } = this.props;
     const { search, currentPage } = this.state;
-    const { perPage } = settings;
+    const { perPage: perPageSetting } = settings;
 
     const searchForm = (event) => {
       this.setState({ search: event.target.value, currentPage: 1 });
@@ -65,7 +66,7 @@ class PageList extends React.Component {
           settings={settings}
           search={(search && search.length) >= (settings.minCharSearch || 3) ? search : undefined}
           currentPage={currentPage}
-          perPage={perPage}
+          perPage={perPage || perPageSetting}
           onChangePage={(currentPageNow) => this.setState({ currentPage: currentPageNow })}
         />
       </SidebarWithSearchAndAvatar>
@@ -76,6 +77,7 @@ class PageList extends React.Component {
 PageList.defaultProps = {
   tabs: undefined,
   createDoc: undefined,
+  perPage: undefined,
 };
 
 PageList.propTypes = {
@@ -85,6 +87,7 @@ PageList.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.object),
   roles: PropTypes.arrayOf(PropTypes.string).isRequired,
   sort: PropTypes.object.isRequired,
+  perPage: PropTypes.number,
   settings: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   currentPageName: PropTypes.string.isRequired,

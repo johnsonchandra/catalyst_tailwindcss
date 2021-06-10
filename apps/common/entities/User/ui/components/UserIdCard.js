@@ -81,7 +81,13 @@ class UserIdCard extends React.Component {
                       {idcard ? (
                         <img src={idcard} alt="idcard" />
                       ) : data.detailUser.Image_User_IDCard ? (
-                        <img src={data.detailUser.Image_User_IDCard} alt="idcard" />
+                        <a
+                          href={data.detailUser.Image_User_IDCard}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <img src={data.detailUser.Image_User_IDCard} alt="idcard" />
+                        </a>
                       ) : (
                         <svg
                           className="mx-auto h-12 w-12 text-gray-400"

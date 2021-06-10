@@ -60,6 +60,10 @@ import OrgListDraftHostPage from './pages/Spv/Org/List/OrgListDraftHostPage';
 import OrgListCurrentHostPage from './pages/Spv/Org/List/OrgListCurrentHostPage';
 import OrgListCurrentFeatureHostPage from './pages/Spv/Org/List/OrgListCurrentFeatureHostPage';
 import OrgListHistoryHostPage from './pages/Spv/Org/List/OrgListHistoryHostPage';
+import EmailSubscriberDetailPage from './pages/Spv/EmailSubscriber/Detail';
+import EmailSubscriberListCurrentPage from './pages/Spv/EmailSubscriber/List/EmailSubscriberListCurrentPage';
+import EmailSubscriberListDraftPage from './pages/Spv/EmailSubscriber/List/EmailSubscriberListDraftPage';
+import EmailSubscriberListHistoryPage from './pages/Spv/EmailSubscriber/List/EmailSubscriberListHistoryPage';
 
 // Member Pages
 import DocumentDetailPage from './pages/Member/Document/Detail';
@@ -416,12 +420,43 @@ class CommonApp extends React.Component {
             {...props}
             {...state}
           />
+
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
-            path="/Spv/Org/List/History/Host"
+            allowedRoles={['spv']}
+            path="/EmailSubscriber/:_id"
             pathAfterFailure="/dashboard"
-            component={OrgListHistoryHostPage}
+            component={EmailSubscriberDetailPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['spv']}
+            path="/EmailSubscriber/List/Draft"
+            pathAfterFailure="/dashboard"
+            component={EmailSubscriberListDraftPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['spv']}
+            path="/EmailSubscriber/List/Current"
+            pathAfterFailure="/dashboard"
+            component={EmailSubscriberListCurrentPage}
+            setAfterLoginPath={setAfterLoginPath}
+            {...props}
+            {...state}
+          />
+          <Authorized
+            exact
+            allowedRoles={['spv']}
+            path="/EmailSubscriber/List/History"
+            pathAfterFailure="/dashboard"
+            component={EmailSubscriberListHistoryPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}

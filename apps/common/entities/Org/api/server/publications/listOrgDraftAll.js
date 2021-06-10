@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import getOrgJSONdefs from '../../utils/getOrgJSONdefs';
 import getQueryAndProjectionForRootAdmin from '../../../../../helpers/getQueryAndProjectionForRootAdmin';
@@ -17,7 +17,7 @@ Meteor.publish(publishName, function pub(props) {
       props,
       getOrgJSONdefs,
     );
-    Counts.publish(this, `${publishName}Count`, Org.find(query));
+    Counts.publish(this, `${publishName}Count`, Org.find(query), { fastCount: true });
     return Org.find(query, projection);
   } catch (exception) {
     console.error(`PUBLISH EXCEPTION - ${publishName} - userId: ${Meteor.userId()}`, exception);

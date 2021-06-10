@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import parseHost from '../../../../helpers/parseHost';
 import checkAuth from '../../../../helpers/checkAuth';
@@ -19,7 +19,7 @@ const pubProcessor = (Entity, publishName, getJSONdefs, props, parent) => {
   };
   if (options.search) query.$or = getJSONdefs(publishName, options).queryOr;
 
-  Counts.publish(parent, `${publishName}Count`, Entity.find(query));
+  Counts.publish(parent, `${publishName}Count`, Entity.find(query), { fastCount: true });
 
   return Entity.find(query, getProjection(options));
 };

@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import React from 'react';
 import PropTypes from 'prop-types';

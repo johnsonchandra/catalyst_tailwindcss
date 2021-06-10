@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import getNotificationQueryAndProjection from '../processors/getNotificationQueryAndProjection';
 
@@ -14,7 +14,7 @@ Meteor.publish(publishName, function pub(props) {
     // this is just for notification. if you dont need it, just look at listNotificationDraft
     const { query, projection } = getNotificationQueryAndProjection(publishName, props, this);
 
-    Counts.publish(this, `${publishName}Count`, Notification.find(query));
+    Counts.publish(this, `${publishName}Count`, Notification.find(query), { fastCount: true });
 
     return Notification.find(query, projection);
   } catch (exception) {

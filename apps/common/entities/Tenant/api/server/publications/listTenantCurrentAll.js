@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import getQueryAndProjection from '../processors/getQueryAndProjection';
 
@@ -14,7 +14,7 @@ Meteor.publish(publishName, function pub(props) {
     // this is just for tenant. if you dont need it, just look at listTenantDraft
     const { query, projection } = getQueryAndProjection(publishName, props, this);
 
-    Counts.publish(this, `${publishName}Count`, Tenant.find(query));
+    Counts.publish(this, `${publishName}Count`, Tenant.find(query), { fastCount: true });
 
     return Tenant.find(query, projection);
   } catch (exception) {

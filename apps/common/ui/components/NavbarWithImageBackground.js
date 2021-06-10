@@ -8,8 +8,18 @@ import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
 export default function NavbarWithImageBackground(props) {
-  const { caption, description, navigations, logoUrl, logoUrlPopUp, logoName, imgUrl, children } =
-    props;
+  const {
+    caption,
+    description,
+    navigations,
+    logoUrl,
+    logoUrlPopUp,
+    logoName,
+    imgUrl,
+    buttonLink,
+    history,
+    children,
+  } = props;
 
   return (
     <div className="min-h-screen bg-white">
@@ -140,6 +150,17 @@ export default function NavbarWithImageBackground(props) {
             {caption}
           </h1>
           <p className="mt-6 text-xl text-cyan-100 max-w-3xl">{description}</p>
+          {buttonLink && (
+            <p className="mt-6 text-xl text-cyan-100 max-w-3xl">
+              <button
+                type="button"
+                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => history.push(`${buttonLink.linkUrl}`)}
+              >
+                {buttonLink.label}
+              </button>
+            </p>
+          )}
         </div>
       </header>
 
@@ -154,6 +175,7 @@ NavbarWithImageBackground.defaultProps = {
   logoName: '',
   logoUrl: '',
   logoUrlPopUp: '',
+  buttonLink: undefined,
   imgUrl:
     'https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100',
 };
@@ -166,5 +188,7 @@ NavbarWithImageBackground.propTypes = {
   logoUrlPopUp: PropTypes.string,
   imgUrl: PropTypes.string,
   navigations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  buttonLink: PropTypes.object,
+  history: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 };

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Counts } from 'meteor/ros:publish-counts';
 
 import getEmailSubscriberQueryAndProjection from '../processors/getEmailSubscriberQueryAndProjection';
 
@@ -14,7 +14,7 @@ Meteor.publish(publishName, function pub(props) {
     // this is just for emailSubscriber. if you dont need it, just look at listEmailSubscriberDraft
     const { query, projection } = getEmailSubscriberQueryAndProjection(publishName, props, this);
 
-    Counts.publish(this, `${publishName}Count`, EmailSubscriber.find(query));
+    Counts.publish(this, `${publishName}Count`, EmailSubscriber.find(query), { fastCount: true });
 
     return EmailSubscriber.find(query, projection);
   } catch (exception) {
