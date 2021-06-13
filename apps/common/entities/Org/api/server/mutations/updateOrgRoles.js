@@ -25,6 +25,7 @@ const updateRoles = ({ _id, roles }, party, host) => {
     });
   }
 
+  // FIXME write approved as member date to hosts field
   return entityUpdate(Org, { _id }, {}, `update roles to ${JSON.stringify(roles)}`, party);
 };
 

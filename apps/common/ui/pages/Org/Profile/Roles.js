@@ -8,21 +8,25 @@ import Tabs from '../../../components/Tabs';
 import getNavs from '../../Dashboard/getNavs';
 
 import SidebarWithSearchAndAvatar from '../../../components/SidebarWithSearchAndAvatar';
-import UserIdCard from '../../../../entities/User/ui/components/UserIdCard';
+import OrgRoles from '../../../../entities/Org/ui/components/OrgRoles';
 
 import tabs from './tabs';
 
-export default function UserIdCardPage(props) {
-  const { roles, history, match } = props;
+export default function OrgRolesPage(props) {
+  const { roles, match, history } = props;
   return (
-    <SidebarWithSearchAndAvatar currentPageName="User" navigations={getNavs(roles)} {...props}>
-      <Tabs tabs={tabs(match.params && match.params._id)} current="ID Card" history={history} />
-      <UserIdCard {...props} />
+    <SidebarWithSearchAndAvatar
+      currentPageName="Organization"
+      navigations={getNavs(roles)}
+      {...props}
+    >
+      <Tabs tabs={tabs(match.params && match.params._id)} current="Roles" history={history} />
+      <OrgRoles {...props} disabled={!(roles.indexOf('spv') > -1 || roles.indexOf('admin') > -1)} />
     </SidebarWithSearchAndAvatar>
   );
 }
 
-UserIdCardPage.propTypes = {
+OrgRolesPage.propTypes = {
   roles: PropTypes.arrayOf(PropTypes.string).isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,

@@ -17,9 +17,6 @@ import Anon from '../../../../ui/components/Anon';
 
 import uploadToS3 from '../../../../helpers/uploadToS3';
 
-// FIXME bikin jadi props aja
-// import provinces from '../../../../../hijau/helpers/provinces';
-
 import { detailUser } from '../utils/queries.gql';
 
 import { updateUser as updateUserMutation } from '../utils/mutations.gql';
@@ -111,6 +108,7 @@ class UserProfile extends React.Component {
   render() {
     const { states, genders, countries, data, match } = this.props;
     // const stateOrProvinces = states || provinces;
+    // FIXME bikin provinces jadi props aja
     const stateOrProvinces = states;
 
     const { pp, cover, progress_Image_User_PP, progress_Image_User_Cover } = this.state;
@@ -510,7 +508,7 @@ class UserProfile extends React.Component {
 UserProfile.defaultProps = {
   states: ['DKI Jakarta'],
   countries: ['Indonesia'],
-  genders: ['Perempuan', 'Laki-Laki', 'Non-Biner', 'Transgender'],
+  genders: ['Perempuan', 'Laki-Laki'],
   routeAfter: undefined,
 };
 

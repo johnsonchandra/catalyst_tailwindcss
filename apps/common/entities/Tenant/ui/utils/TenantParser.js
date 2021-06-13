@@ -13,7 +13,7 @@ const TenantParser = (docs, settings) => {
       to: 'Updated At',
     },
     {
-      from: (doc) => `/Root/Tenant/${doc._id}${doc.status === 'Draft' ? '/edit' : ''}`,
+      from: (doc) => `/Tenant/${doc._id}${doc.status === 'Draft' ? '/edit' : ''}`,
       to: 'linkUrl',
     },
   ]);

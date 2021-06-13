@@ -29,47 +29,43 @@ import UserResetPasswordPage from './pages/User/Access/UserResetPasswordPage';
 import Home from './pages/Home';
 
 // app authorized pages
-import Dashboard from './pages/Home/Dashboard';
+import Dashboard from './pages/Dashboard';
 
 // Root Pages
-import UserListUnverifiedAllPage from './pages/Root/User/UserListUnverifiedAllPage';
-import UserListCurrentAllPage from './pages/Root/User/UserListCurrentAllPage';
-import UserListOnlineAllPage from './pages/Root/User/UserListOnlineAllPage';
+import UserListUnverifiedAllPage from './pages/User/List/All/UserListUnverifiedAllPage';
+import UserListCurrentAllPage from './pages/User/List/All/UserListCurrentAllPage';
+import UserListOnlineAllPage from './pages/User/List/All/UserListOnlineAllPage';
 
-import OrgListDraftAllPage from './pages/Root/Org/OrgListDraftAllPage';
-import OrgListCurrentAllPage from './pages/Root/Org/OrgListCurrentAllPage';
-import OrgListCurrentFeatureAllPage from './pages/Root/Org/OrgListCurrentFeatureAllPage';
-import OrgListHistoryAllPage from './pages/Root/Org/OrgListHistoryAllPage';
+import OrgListDraftAllPage from './pages/Org/List/All/OrgListDraftAllPage';
+import OrgListCurrentAllPage from './pages/Org/List/All/OrgListCurrentAllPage';
+import OrgListCurrentFeatureAllPage from './pages/Org/List/All/OrgListCurrentFeatureAllPage';
+import OrgListHistoryAllPage from './pages/Org/List/All/OrgListHistoryAllPage';
 
-import TenantListDraftAllPage from './pages/Root/Tenant/TenantListDraftAllPage';
-import TenantListCurrentAllPage from './pages/Root/Tenant/TenantListCurrentAllPage';
-import TenantListHistoryAllPage from './pages/Root/Tenant/TenantListHistoryAllPage';
+import TenantListDraftAllPage from './pages/Tenant/TenantListDraftAllPage';
+import TenantListCurrentAllPage from './pages/Tenant/TenantListCurrentAllPage';
+import TenantListHistoryAllPage from './pages/Tenant/TenantListHistoryAllPage';
 
 // Admin Pages
-import UserListUnverifiedHostPage from './pages/Admin/User/UserListUnverifiedHostPage';
-import UserListWaitingApprovalHostPage from './pages/Admin/User/UserListWaitingApprovalHostPage';
-import UserListApprovedHostPage from './pages/Admin/User/UserListApprovedHostPage';
-import UserListCurrentHostPage from './pages/Admin/User/UserListCurrentHostPage';
-import UserListOnlineHostPage from './pages/Admin/User/UserListOnlineHostPage';
+import UserListUnverifiedHostPage from './pages/User/List/Host/UserListUnverifiedHostPage';
+import UserListWaitingApprovalHostPage from './pages/User/List/Host/UserListWaitingApprovalHostPage';
+import UserListApprovedHostPage from './pages/User/List/Host/UserListApprovedHostPage';
+import UserListCurrentHostPage from './pages/User/List/Host/UserListCurrentHostPage';
+import UserListOnlineHostPage from './pages/User/List/Host/UserListOnlineHostPage';
 
 // Spv Pages
-import OrgProfilePage from './pages/Spv/Org/Profile';
-import OrgRolesPage from './pages/Spv/Org/Profile/Roles';
-import OrgUsersPage from './pages/Spv/Org/Profile/Users';
-import OrgListDraftHostPage from './pages/Spv/Org/List/OrgListDraftHostPage';
-import OrgListCurrentHostPage from './pages/Spv/Org/List/OrgListCurrentHostPage';
-import OrgListCurrentFeatureHostPage from './pages/Spv/Org/List/OrgListCurrentFeatureHostPage';
-import OrgListHistoryHostPage from './pages/Spv/Org/List/OrgListHistoryHostPage';
-import EmailSubscriberDetailPage from './pages/Spv/EmailSubscriber/Detail';
-import EmailSubscriberListCurrentPage from './pages/Spv/EmailSubscriber/List/EmailSubscriberListCurrentPage';
-import EmailSubscriberListDraftPage from './pages/Spv/EmailSubscriber/List/EmailSubscriberListDraftPage';
-import EmailSubscriberListHistoryPage from './pages/Spv/EmailSubscriber/List/EmailSubscriberListHistoryPage';
+import OrgProfilePage from './pages/Org/Profile';
+import OrgRolesPage from './pages/Org/Profile/Roles';
+import OrgUsersPage from './pages/Org/Profile/Users';
+import OrgListDraftHostPage from './pages/Org/List/Host/OrgListDraftHostPage';
+import OrgListCurrentHostPage from './pages/Org/List/Host/OrgListCurrentHostPage';
+import OrgListCurrentFeatureHostPage from './pages/Org/List/Host/OrgListCurrentFeatureHostPage';
+import OrgListHistoryHostPage from './pages/Org/List/Host/OrgListHistoryHostPage';
 
 // Member Pages
-import DocumentDetailPage from './pages/Member/Document/Detail';
-import DocumentListDraftPage from './pages/Member/Document/List/DocumentListDraftPage';
-import DocumentListCurrentPage from './pages/Member/Document/List/DocumentListCurrentPage';
-import DocumentListHistoryPage from './pages/Member/Document/List/DocumentListHistoryPage';
+import DocumentDetailPage from './pages/Document/Detail';
+import DocumentListDraftPage from './pages/Document/List/DocumentListDraftPage';
+import DocumentListCurrentPage from './pages/Document/List/DocumentListCurrentPage';
+import DocumentListHistoryPage from './pages/Document/List/DocumentListHistoryPage';
 
 // User Pages
 import UserProfilePage from './pages/User/Profile';
@@ -166,7 +162,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/User/List/Unverified/All"
+            path="/User/List/Unverified/All"
             pathAfterFailure="/dashboard"
             component={UserListUnverifiedAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -176,7 +172,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/User/List/Current/All"
+            path="/User/List/Current/All"
             pathAfterFailure="/dashboard"
             component={UserListCurrentAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -186,7 +182,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/User/List/Online/All"
+            path="/User/List/Online/All"
             pathAfterFailure="/dashboard"
             component={UserListOnlineAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -197,7 +193,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/Org/List/Draft/All"
+            path="/Org/List/Draft/All"
             pathAfterFailure="/dashboard"
             component={OrgListDraftAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -207,7 +203,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/Org/List/Current/All"
+            path="/Org/List/Current/All"
             pathAfterFailure="/dashboard"
             component={OrgListCurrentAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -217,7 +213,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/Org/List/CurrentFeature/All"
+            path="/Org/List/CurrentFeature/All"
             pathAfterFailure="/dashboard"
             component={OrgListCurrentFeatureAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -227,7 +223,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/Org/List/History/All"
+            path="/Org/List/History/All"
             pathAfterFailure="/dashboard"
             component={OrgListHistoryAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -238,7 +234,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/Tenant/List/Draft/All"
+            path="/Tenant/List/Draft/All"
             pathAfterFailure="/dashboard"
             component={TenantListDraftAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -248,7 +244,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/Tenant/List/Current/All"
+            path="/Tenant/List/Current/All"
             pathAfterFailure="/dashboard"
             component={TenantListCurrentAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -258,7 +254,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['root']}
-            path="/Root/Tenant/List/History/All"
+            path="/Tenant/List/History/All"
             pathAfterFailure="/dashboard"
             component={TenantListHistoryAllPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -270,7 +266,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
-            path="/Admin/User/List/Unverified/Host"
+            path="/User/List/Unverified/Host"
             pathAfterFailure="/dashboard"
             component={UserListUnverifiedHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -280,7 +276,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
-            path="/Admin/User/List/WaitingApproval/Host"
+            path="/User/List/WaitingApproval/Host"
             pathAfterFailure="/dashboard"
             component={UserListWaitingApprovalHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -290,7 +286,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
-            path="/Admin/User/List/Approved/Host"
+            path="/User/List/Approved/Host"
             pathAfterFailure="/dashboard"
             component={UserListApprovedHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -300,7 +296,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
-            path="/Admin/User/List/Current/Host"
+            path="/User/List/Current/Host"
             pathAfterFailure="/dashboard"
             component={UserListCurrentHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -310,7 +306,7 @@ class CommonApp extends React.Component {
           <Authorized
             exact
             allowedRoles={['admin']}
-            path="/Admin/User/List/Online/Host"
+            path="/User/List/Online/Host"
             pathAfterFailure="/dashboard"
             component={UserListOnlineHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -352,7 +348,7 @@ class CommonApp extends React.Component {
           {/* SPV */}
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
+            allowedRoles={['spv']}
             path="/Org/:_id"
             pathAfterFailure="/dashboard"
             component={OrgProfilePage}
@@ -362,7 +358,7 @@ class CommonApp extends React.Component {
           />
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
+            allowedRoles={['spv']}
             path="/Org/:_id/Roles"
             pathAfterFailure="/dashboard"
             component={OrgRolesPage}
@@ -372,7 +368,7 @@ class CommonApp extends React.Component {
           />
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
+            allowedRoles={['spv']}
             path="/Org/:_id/Users"
             pathAfterFailure="/dashboard"
             component={OrgUsersPage}
@@ -382,8 +378,8 @@ class CommonApp extends React.Component {
           />
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
-            path="/Spv/Org/List/Draft/Host"
+            allowedRoles={['spv']}
+            path="/Org/List/Draft/Host"
             pathAfterFailure="/dashboard"
             component={OrgListDraftHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -392,8 +388,8 @@ class CommonApp extends React.Component {
           />
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
-            path="/Spv/Org/List/Current/Host"
+            allowedRoles={['spv']}
+            path="/Org/List/Current/Host"
             pathAfterFailure="/dashboard"
             component={OrgListCurrentHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -402,8 +398,8 @@ class CommonApp extends React.Component {
           />
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
-            path="/Spv/Org/List/CurrentFeature/Host"
+            allowedRoles={['spv']}
+            path="/Org/List/CurrentFeature/Host"
             pathAfterFailure="/dashboard"
             component={OrgListCurrentFeatureHostPage}
             setAfterLoginPath={setAfterLoginPath}
@@ -412,51 +408,20 @@ class CommonApp extends React.Component {
           />
           <Authorized
             exact
-            allowedRoles={['spv', 'admin']}
-            path="/Spv/Org/List/History/Host"
+            allowedRoles={['spv']}
+            path="/Org/List/History/Host"
             pathAfterFailure="/dashboard"
             component={OrgListHistoryHostPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}
           />
-
           <Authorized
             exact
             allowedRoles={['spv']}
-            path="/EmailSubscriber/:_id"
+            path="/Org/List/History/Host"
             pathAfterFailure="/dashboard"
-            component={EmailSubscriberDetailPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authorized
-            exact
-            allowedRoles={['spv']}
-            path="/EmailSubscriber/List/Draft"
-            pathAfterFailure="/dashboard"
-            component={EmailSubscriberListDraftPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authorized
-            exact
-            allowedRoles={['spv']}
-            path="/EmailSubscriber/List/Current"
-            pathAfterFailure="/dashboard"
-            component={EmailSubscriberListCurrentPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authorized
-            exact
-            allowedRoles={['spv']}
-            path="/EmailSubscriber/List/History"
-            pathAfterFailure="/dashboard"
-            component={EmailSubscriberListHistoryPage}
+            component={OrgListHistoryHostPage}
             setAfterLoginPath={setAfterLoginPath}
             {...props}
             {...state}

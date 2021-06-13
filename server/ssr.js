@@ -17,13 +17,14 @@ import parseHost from '../apps/common/helpers/parseHost';
 
 import Tenant from '../apps/common/entities/Tenant/api';
 
+import DefaultApp from '../apps/default/ui';
 import CommonApp from '../apps/common/ui';
 import ExampleApp from '../apps/example/ui';
 
 const Apps = {
+  default: DefaultApp,
   'common.maya': CommonApp,
   'example.maya': ExampleApp,
-  localhost: ExampleApp,
 };
 
 onPageLoad(async (sink) => {
@@ -56,7 +57,7 @@ onPageLoad(async (sink) => {
     return;
   }
 
-  const App = Apps[host];
+  const App = Apps[host] || Apps.default;
 
   const apolloClient = new ApolloClient({
     ssrMode: true,

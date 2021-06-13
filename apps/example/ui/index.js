@@ -25,17 +25,17 @@ import UserSignupPage from '../../common/ui/pages/User/Access/UserSignupPage';
 import Home from './pages/Home';
 
 // app authorized pages
-import Dashboard from './pages/Home/Dashboard';
+import Dashboard from './pages/Dashboard';
 
 // Member Pages
-import DocumentListDraftPage from '../../common/ui/pages/Member/Document/List/DocumentListDraftPage';
-import DocumentListCurrentPage from '../../common/ui/pages/Member/Document/List/DocumentListCurrentPage';
-import DocumentListHistoryPage from '../../common/ui/pages/Member/Document/List/DocumentListHistoryPage';
+import DocumentListDraftPage from '../../common/ui/pages/Document/List/DocumentListDraftPage';
+import DocumentListCurrentPage from '../../common/ui/pages/Document/List/DocumentListCurrentPage';
+import DocumentListHistoryPage from '../../common/ui/pages/Document/List/DocumentListHistoryPage';
 
 // User Pages
 import UserProfilePage from '../../common/ui/pages/User/Profile';
 import UserRolesPage from '../../common/ui/pages/User/Profile/Roles';
-import DocumentDetailPage from '../../common/ui/pages/Member/Document/Detail';
+import DocumentDetailPage from '../../common/ui/pages/Document/Detail';
 
 // All Pages
 import AboutPage from './pages/About';

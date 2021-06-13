@@ -498,7 +498,7 @@ export default compose(
     options: ({ history }) => ({
       onCompleted: () => {
         alert('Organization Deleted!');
-        history.push('/Spv/Org/List/Draft/Host');
+        history.push('/Org/List/Draft/Host');
       },
       onError: (error) => {
         alert(error.message);
@@ -513,7 +513,7 @@ export default compose(
       },
       onCompleted: () => {
         alert('Organization Status set to Draft!');
-        history.push('/Spv/Org/List/Draft/Host');
+        history.push('/Org/List/Draft/Host');
       },
       onError: (error) => {
         alert(error.message);
@@ -528,7 +528,7 @@ export default compose(
       },
       onCompleted: () => {
         alert('Organization Status set to Active!');
-        history.push('/Spv/Org/List/Current/Host');
+        history.push('/Org/List/Current/Host');
       },
       onError: (error) => {
         alert(error.message);

@@ -11,7 +11,7 @@ import Tabs from '../components/Tabs';
 
 import EntityList from '../containers/EntityList';
 
-import getNavs from './getNavs';
+import getNavs from './Dashboard/getNavs';
 
 class PageList extends React.Component {
   constructor(props) {

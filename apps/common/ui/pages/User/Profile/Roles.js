@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import Tabs from '../../../components/Tabs';
 
-import getNavs from '../../getNavs';
+import getNavs from '../../Dashboard/getNavs';
 
 import SidebarWithSearchAndAvatar from '../../../components/SidebarWithSearchAndAvatar';
 import UserRoles from '../../../../entities/User/ui/components/UserRoles';

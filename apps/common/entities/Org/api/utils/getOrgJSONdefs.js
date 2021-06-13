@@ -14,7 +14,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgDraftHost: {
-      auth: ['member', 'spv', 'admin'],
+      auth: ['member', 'spv'],
       query: { status: { $in: ['Draft', 'Queue'] } },
       fields: {
         nr: 1,
@@ -36,7 +36,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgCurrentHost: {
-      auth: ['member', 'spv', 'admin'],
+      auth: ['member', 'spv'],
       query: { status: 'Active' },
       fields: {
         nr: 1,
@@ -58,7 +58,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgCurrentFeatureHost: {
-      auth: ['member', 'spv', 'admin'],
+      auth: ['member', 'spv'],
       query: { featureNr: { $gt: 0 }, status: 'Active' },
       fields: {
         nr: 1,
@@ -85,7 +85,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgHistoryHost: {
-      auth: ['spv', 'admin'],
+      auth: ['spv'],
       query: { status: 'Closed' },
       fields: {
         nr: 1,
@@ -102,7 +102,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     listOrgProcessingHost: {
-      auth: ['spv', 'admin'],
+      auth: ['spv'],
       query: { status: 'Processing' },
       fields: {
         nr: 1,
@@ -119,7 +119,7 @@ const getOrgJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     detailOrg: {
-      auth: ['member', 'spv', 'admin'],
+      auth: ['member', 'spv'],
       query: { _id: props && props._id },
       fields: {
         nr: 1,
@@ -142,22 +142,22 @@ const getOrgJSONdefs = (publishName, props) => {
       },
     },
     addOrg: {
-      auth: ['member', 'spv', 'admin'],
+      auth: ['member', 'spv'],
     },
     updateOrg: {
-      auth: ['member', 'spv', 'admin'],
+      auth: ['member', 'spv'],
     },
     removeOrg: {
-      auth: ['spv', 'admin'],
+      auth: ['member', 'spv'],
     },
     setOrgStatusToDraft: {
-      auth: ['spv', 'admin'],
+      auth: ['spv'],
     },
     setOrgStatusToActive: {
-      auth: ['spv', 'admin'],
+      auth: ['spv'],
     },
     setOrgStatusToClosed: {
-      auth: ['spv', 'admin'],
+      auth: ['spv'],
     },
   };
   if (defs[publishName]) return defs[publishName];

@@ -42,19 +42,19 @@ const getDocumentJSONdefs = (publishName, props) => {
       queryOr: queryOr(props),
     },
     addDocument: {
-      auth: ['user', 'member', 'spv'],
+      auth: ['member', 'spv'],
     },
     updateDocument: {
-      auth: ['user', 'member', 'spv'],
+      auth: ['member', 'spv'],
     },
     removeDocument: {
-      auth: ['member', 'spv'],
+      auth: ['member', 'spv'], // only Draft can be removed so member right here is ok
     },
     setDocumentStatusToDraft: {
       auth: ['spv'],
     },
     setDocumentStatusToActive: {
-      auth: ['member', 'spv'],
+      auth: ['spv'],
     },
     setDocumentStatusToClosed: {
       auth: ['spv'],

@@ -14,7 +14,7 @@ import UserList from '../containers/UserList';
 import parser from '../../entities/User/ui/utils/UserParser';
 import jsonDefs from '../../entities/User/api/utils/getUserJSONdefs';
 
-import getNavs from './getNavs';
+import getNavs from './Dashboard/getNavs';
 
 class PageUserList extends React.Component {
   constructor(props) {
