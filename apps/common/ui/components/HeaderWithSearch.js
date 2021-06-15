@@ -9,6 +9,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { SearchIcon } from '@heroicons/react/solid';
 import { ShoppingCartIcon, MenuIcon, XIcon, LoginIcon } from '@heroicons/react/outline';
 
+import Anon from './Anon';
+
 import classNames from '../../helpers/classNames';
 
 class HeaderWithSearch extends React.Component {
@@ -20,7 +22,7 @@ class HeaderWithSearch extends React.Component {
   };
 
   render() {
-    const { authenticated, name, emailAddress, navigations, pageTitle, settings, history } =
+    const { user, authenticated, name, emailAddress, navigations, pageTitle, settings, history } =
       this.props;
 
     return (
@@ -116,11 +118,13 @@ class HeaderWithSearch extends React.Component {
                             <div>
                               <Menu.Button className="bg-gray-800 rounded-full flex text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span className="sr-only">Open user menu</span>
-                                <img
-                                  className="h-8 w-8 rounded-full"
-                                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                />
+                                <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-100">
+                                  {user.profile.Image_User_PP ? (
+                                    <img src={user.profile.Image_User_PP} alt="" />
+                                  ) : (
+                                    <Anon />
+                                  )}
+                                </div>
                               </Menu.Button>
                             </div>
                             <Transition
@@ -210,11 +214,17 @@ class HeaderWithSearch extends React.Component {
                 <div className="pt-4 pb-3 border-t border-gray-700">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-100">
+                        {user.profile.Image_User_PP ? (
+                          <img
+                            className="h-10 w-10 rounded-full overflow-hidden bg-gray-100"
+                            src={user.profile.Image_User_PP}
+                            alt=""
+                          />
+                        ) : (
+                          <Anon />
+                        )}
+                      </div>
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium text-white">{name}</div>
@@ -267,6 +277,7 @@ class HeaderWithSearch extends React.Component {
 }
 
 HeaderWithSearch.defaultProps = {
+  user: {},
   name: '',
   emailAddress: '',
 };
@@ -277,6 +288,7 @@ HeaderWithSearch.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   emailAddress: PropTypes.string,
   pageTitle: PropTypes.string.isRequired,
+  user: PropTypes.object,
   settings: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
