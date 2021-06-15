@@ -70,7 +70,7 @@ export default function NavbarTop(props) {
                       <span className="sr-only">{name}</span>
                       <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-100">
                         {user.profile.Image_User_PP ? (
-                          <img src={user.profile.Image_User_PP} alt={name} />
+                          <img src={user.profile.Image_User_PP} alt="" />
                         ) : (
                           <Anon />
                         )}

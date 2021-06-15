@@ -99,7 +99,7 @@ export default function NavbarWithImageBackground(props) {
                   <div className="rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                     <div className="px-5 pt-4 flex items-center justify-between">
                       <div>
-                        <img className="h-8 w-auto" src={logoUrlPopUp} alt="logo" />
+                        <img className="h-8 w-auto" src={logoUrlPopUp} alt="" />
                       </div>
                       <div className="-mr-2">
                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-warm-gray-400 hover:bg-warm-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">

@@ -16,7 +16,7 @@ export default function FooterWithSitemap(props) {
         </div>
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <img src={logoUrl} alt="Logo" />
+            <img src={logoUrl} alt="" />
             <p className="text-warm-gray-500 text-base">{motto}</p>
             <div className="flex space-x-6">
               {navigationsFooter.social &&

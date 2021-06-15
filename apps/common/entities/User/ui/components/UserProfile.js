@@ -201,7 +201,7 @@ class UserProfile extends React.Component {
                           <img src={pp} alt="pp" />
                         ) : data.detailUser.Image_User_PP ? (
                           <a href={data.detailUser.Image_User_PP} target="_blank" rel="noreferrer">
-                            <img src={data.detailUser.Image_User_PP} alt="pp" />
+                            <img src={data.detailUser.Image_User_PP} alt="" />
                           </a>
                         ) : (
                           <Anon />
@@ -238,14 +238,14 @@ class UserProfile extends React.Component {
                       <div className="space-y-1 text-center">
                         {/* eslint-disable-next-line no-nested-ternary */}
                         {cover ? (
-                          <img src={cover} alt="cover" />
+                          <img src={cover} alt="" />
                         ) : data.detailUser.Image_User_Cover ? (
                           <a
                             href={data.detailUser.Image_User_Cover}
                             target="_blank"
                             rel="noreferrer"
                           >
-                            <img src={data.detailUser.Image_User_Cover} alt="cover" />
+                            <img src={data.detailUser.Image_User_Cover} alt="" />
                           </a>
                         ) : (
                           <svg

@@ -79,14 +79,14 @@ class UserIdCard extends React.Component {
                     <div className="space-y-1 text-center">
                       {/* eslint-disable-next-line no-nested-ternary */}
                       {idcard ? (
-                        <img src={idcard} alt="idcard" />
+                        <img src={idcard} alt="" />
                       ) : data.detailUser.Image_User_IDCard ? (
                         <a
                           href={data.detailUser.Image_User_IDCard}
                           target="_blank"
                           rel="noreferrer"
                         >
-                          <img src={data.detailUser.Image_User_IDCard} alt="idcard" />
+                          <img src={data.detailUser.Image_User_IDCard} alt="" />
                         </a>
                       ) : (
                         <svg

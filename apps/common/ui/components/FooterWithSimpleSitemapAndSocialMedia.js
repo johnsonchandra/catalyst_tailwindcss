@@ -11,7 +11,7 @@ export default function FooterWithSimpleSitemapAndSocialMedia(props) {
       <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         {logoUrl && (
           <div className="-mx-5 -my-2 flex flex-wrap justify-center">
-            <img src={logoUrl} alt="logo" className="h-14 w-auto" />
+            <img src={logoUrl} alt="" className="h-14 w-auto" />
           </div>
         )}
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
