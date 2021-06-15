@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'react-autobind/src/autoBind';
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import withTrackerSsr from '../../common/helpers/withTrackerSsr';
 import initApp from '../../common/helpers/initApp';
@@ -64,97 +64,95 @@ class ExampleApp extends React.Component {
     const { props, state, setAfterLoginPath } = this;
 
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact name="home" path="/" component={Home} />
-          <Route exact name="about" path="/about" component={AboutPage} />
+      <Switch>
+        <Route exact name="home" path="/" component={Home} />
+        <Route exact name="about" path="/about" component={AboutPage} />
 
-          <Authorized
-            exact
-            allowedRoles={['user', 'member', 'spv']}
-            path="/dashboard"
-            component={Dashboard}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
+        <Authorized
+          exact
+          allowedRoles={['user', 'member', 'spv']}
+          path="/dashboard"
+          component={Dashboard}
+          setAfterLoginPath={setAfterLoginPath}
+          {...props}
+          {...state}
+        />
 
-          {/* MEMBER */}
-          <Authorized
-            exact
-            allowedRoles={['member', 'spv']}
-            path="/Document/:_id"
-            pathAfterFailure="/dashboard"
-            component={DocumentDetailPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authorized
-            exact
-            allowedRoles={['member', 'spv']}
-            path="/Document/List/Draft"
-            pathAfterFailure="/dashboard"
-            component={DocumentListDraftPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authorized
-            exact
-            allowedRoles={['member', 'spv']}
-            path="/Document/List/Current"
-            pathAfterFailure="/dashboard"
-            component={DocumentListCurrentPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authorized
-            exact
-            allowedRoles={['spv']}
-            path="/Document/List/History"
-            pathAfterFailure="/dashboard"
-            component={DocumentListHistoryPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
+        {/* MEMBER */}
+        <Authorized
+          exact
+          allowedRoles={['member', 'spv']}
+          path="/Document/:_id"
+          pathAfterFailure="/dashboard"
+          component={DocumentDetailPage}
+          setAfterLoginPath={setAfterLoginPath}
+          {...props}
+          {...state}
+        />
+        <Authorized
+          exact
+          allowedRoles={['member', 'spv']}
+          path="/Document/List/Draft"
+          pathAfterFailure="/dashboard"
+          component={DocumentListDraftPage}
+          setAfterLoginPath={setAfterLoginPath}
+          {...props}
+          {...state}
+        />
+        <Authorized
+          exact
+          allowedRoles={['member', 'spv']}
+          path="/Document/List/Current"
+          pathAfterFailure="/dashboard"
+          component={DocumentListCurrentPage}
+          setAfterLoginPath={setAfterLoginPath}
+          {...props}
+          {...state}
+        />
+        <Authorized
+          exact
+          allowedRoles={['spv']}
+          path="/Document/List/History"
+          pathAfterFailure="/dashboard"
+          component={DocumentListHistoryPage}
+          setAfterLoginPath={setAfterLoginPath}
+          {...props}
+          {...state}
+        />
 
-          {/* USER */}
-          <Authenticated
-            exact
-            path="/profile"
-            component={UserProfilePage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
-          <Authenticated
-            exact
-            path="/roles"
-            component={UserRolesPage}
-            setAfterLoginPath={setAfterLoginPath}
-            {...props}
-            {...state}
-          />
+        {/* USER */}
+        <Authenticated
+          exact
+          path="/profile"
+          component={UserProfilePage}
+          setAfterLoginPath={setAfterLoginPath}
+          {...props}
+          {...state}
+        />
+        <Authenticated
+          exact
+          path="/roles"
+          component={UserRolesPage}
+          setAfterLoginPath={setAfterLoginPath}
+          {...props}
+          {...state}
+        />
 
-          {/* ALL route */}
-          <Public path="/signup" component={UserSignupPage} {...props} {...state} />
-          <Public path="/login" component={UserLoginPage} {...props} {...state} />
-          <Route
-            path="/logout"
-            render={(routeProps) => (
-              <UserLogoutPage {...routeProps} setAfterLoginPath={setAfterLoginPath} />
-            )}
-            {...props}
-            {...state}
-          />
+        {/* ALL route */}
+        <Public path="/signup" component={UserSignupPage} {...props} {...state} />
+        <Public path="/login" component={UserLoginPage} {...props} {...state} />
+        <Route
+          path="/logout"
+          render={(routeProps) => (
+            <UserLogoutPage {...routeProps} setAfterLoginPath={setAfterLoginPath} />
+          )}
+          {...props}
+          {...state}
+        />
 
-          <Route name="NotAuthorized" path="/NotAuthorized" component={NotAuthorized} />
-          <Route component={NotFound} />
-        </Switch>
-      </BrowserRouter>
+        <Route name="NotAuthorized" path="/NotAuthorized" component={NotAuthorized} />
+        <Route component={NotFound} />
+      </Switch>
     );
   }
 }

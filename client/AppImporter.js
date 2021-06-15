@@ -3,6 +3,8 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
+import { BrowserRouter } from 'react-router-dom';
+
 import Loading from '../apps/common/ui/components/Loading';
 import parseHost from '../apps/common/helpers/parseHost';
 
@@ -30,7 +32,11 @@ class AppImporter extends React.Component {
     const { props, state } = this;
     const host = parseHost(window.location.hostname);
     const App = Apps[host] || Apps.default; // toogle this if you do not want dynamic loading, e.g. for debug purpose
-    return <App {...props} {...state} />;
+    return (
+      <BrowserRouter>
+        <App {...props} {...state} />
+      </BrowserRouter>
+    );
   }
 }
 

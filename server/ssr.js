@@ -4,7 +4,7 @@ import { onPageLoad } from 'meteor/server-render';
 import 'isomorphic-fetch';
 
 import React from 'react';
-import { StaticRouter } from 'react-router';
+import { StaticRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { ApolloProvider, renderToStringWithData } from 'react-apollo';
@@ -57,6 +57,7 @@ onPageLoad(async (sink) => {
     return;
   }
 
+  // FIXME for ssr to, always use authenticated instead of Meteor.userId() in frontend
   const App = Apps[host] || Apps.default;
 
   const apolloClient = new ApolloClient({
